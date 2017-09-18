@@ -7,27 +7,26 @@ public class Solution {
         Scanner in = new Scanner(System.in);
 
         int n = in.nextInt();
-        String nArr[] = new String[n];
-        in.nextLine(); //jump to first line 
-        for (int i = 0; i < n; i++) {
-            nArr[i] = in.nextLine();
-        }
+        int m = in.nextInt();
 
-        int q = in.nextInt();
-        String qArr[] = new String[q];
-        in.nextLine(); //jump to first line 
-        for (int i = 0; i < q; i++) {
-            qArr[i] = in.nextLine();
-        }
+        long arr[] = new long[n];
 
-        for (String qs : qArr) {
-            int c = 0;
-            for (String ns : nArr) {
-                if (ns.equals(qs)) {
-                    c++;
-                }
+        for (int i = 0; i < m; i++) {
+            int a = in.nextInt();
+            int b = in.nextInt();
+            long k = in.nextLong();
+            for (int j = a - 1; j < b; j++) {
+                arr[j] += k;
             }
-            System.out.println(c);
         }
+
+        long max = Long.MIN_VALUE;
+        for (long l : arr) {
+            if (max < l) {
+                max = l;
+            }
+        }
+        
+        System.out.println(max);
     }
 }
