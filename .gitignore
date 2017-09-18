@@ -3,3 +3,5 @@ java/**/build.xml
 java/**/build/
 java/**/nbproject/
 java/**/dist/
+/Left Rotation/nbproject/private/
+/Left Rotation/build/
