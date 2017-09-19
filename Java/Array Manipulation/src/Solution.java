@@ -1,32 +1,42 @@
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Solution {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         Scanner in = new Scanner(System.in);
 
         int n = in.nextInt();
         int m = in.nextInt();
 
-        long arr[] = new long[n];
+        long arr[] = new long[n + 1];
+
+        int a[] = new int[m];
+        int b[] = new int[m];
+        long k[] = new long[m];
 
         for (int i = 0; i < m; i++) {
-            int a = in.nextInt();
-            int b = in.nextInt();
-            long k = in.nextLong();
-            for (int j = a - 1; j < b; j++) {
-                arr[j] += k;
-            }
+            a[i] = in.nextInt() - 1;
+            b[i] = in.nextInt() - 1;
+            k[i] = in.nextLong();
+        }
+        in.close();
+
+        for (int i = 0; i < m; i++) {
+            arr[a[i]] += k[i];
+            arr[b[i] + 1] -= k[i];
         }
 
-        long max = Long.MIN_VALUE;
+        long max = 0;
+        long total = 0;
         for (long l : arr) {
-            if (max < l) {
-                max = l;
+            total += l;
+            if (max < total) {
+                max = total;
             }
         }
-        
         System.out.println(max);
+
     }
 }
