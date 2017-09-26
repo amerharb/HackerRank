@@ -16,7 +16,7 @@ public class Solution {
         for (int i = 0; i < c; i++) {
             v[i] = in.nextInt();
         }
-
+        
         for (int i = 0; i < c / 2; i++) {
             int l = 0;
             for (int j = i - 1; j >= 0; j--) {
@@ -40,7 +40,7 @@ public class Solution {
             }
         }
 
-        for (int i = c / 2 ; i < c; i++) {
+        for (int i = c / 2; i < c; i++) {
             //find right first
             int r = 0;
             for (int k = i + 1; k < c; k++) {
@@ -60,13 +60,13 @@ public class Solution {
                         break;
                     }
                 }
-                m[i] = l * r;
+                m[i] = (long)l * (long)r;
             }
 
         }
 
         //find max
-        long max = m[0];
+        long max = Long.MIN_VALUE;
         for (long i : m) {
             if (max < i) {
                 max = i;
