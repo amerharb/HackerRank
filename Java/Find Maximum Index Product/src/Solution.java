@@ -12,56 +12,80 @@ public class Solution {
         int c = in.nextInt();
         int v[] = new int[c];
         long m[] = new long[c];
+        int leftV[] = new int[c];
+        int rightV[] = new int[c];
+
+        int lastLeftValue = Integer.MIN_VALUE;
+        int lastLeftIndex = -1;
+
+        if (c > 0) {
+            v[0] = in.nextInt();
+            leftV[0] = -1;
+            lastLeftValue = v[0];
+        }
+
+        for (int i = 1; i < c; i++) {
+            v[i] = in.nextInt();
+            if (v[i] < v[i - 1]) {
+                lastLeftValue = v[i - 1];
+                lastLeftIndex = i - 1;
+                leftV[i] = i - 1;
+            } else if (v[i] == v[i - 1]) {
+                leftV[i] = lastLeftIndex;
+            } else if (lastLeftIndex == -1 || v[i] < lastLeftValue) {
+                leftV[i] = lastLeftIndex;
+            } else if (v[i] == lastLeftValue) {
+                leftV[i] = leftV[lastLeftIndex];
+            } else if (v[i] > lastLeftValue) {
+                leftV[i] = -1;//unless next loop find better value
+                lastLeftValue = v[i];
+                int j = leftV[lastLeftIndex];
+                while (j >= 0) {
+                    if (v[j] > v[i]) {
+                        leftV[i] = j;
+                        break;
+                    }
+                    j = leftV[j];
+                }
+            }
+        }
+
+        int lastRightValue = Integer.MIN_VALUE;
+        int lastRightIndex = -1;
+
+        if (c > 0) {
+            rightV[c - 1] = -1;
+            lastRightValue = v[c - 1];
+        }
+
+        for (int i = c - 2; i >= 0; i--) {
+            if (v[i] < v[i + 1]) {
+                lastRightValue = v[i + 1];
+                lastRightIndex = i + 1;
+                rightV[i] = i + 1;
+            } else if (v[i] == v[i + 1]) {
+                rightV[i] = lastRightIndex;
+            } else if (lastRightIndex == -1 || v[i] < lastRightValue) {
+                rightV[i] = lastRightIndex;
+            } else if (v[i] == lastRightValue) {
+                rightV[i] = rightV[lastRightIndex];
+            } else if (v[i] > lastRightValue) {
+                rightV[i] = -1; //unless next loop find better value
+                lastRightValue = v[i];
+                int j = rightV[lastRightIndex];
+                while (j >= 0) {
+                    if (v[j] > v[i]) {
+                        rightV[i] = j;
+                        break;
+                    }
+                    j = rightV[j];
+                }
+            }
+        }
 
         for (int i = 0; i < c; i++) {
-            v[i] = in.nextInt();
-        }
-        
-        for (int i = 0; i < c / 2; i++) {
-            int l = 0;
-            for (int j = i - 1; j >= 0; j--) {
-                if (v[j] > v[i]) {
-                    l = j + 1;
-                    break;
-                }
-            }
-            if (l == 0) {
-                m[i] = 0;
-            } else {
-                //find right
-                int r = 0;
-                for (int k = i + 1; k < c; k++) {
-                    if (v[k] > v[i]) {
-                        r = k + 1;
-                        break;
-                    }
-                }
-                m[i] = l * r;
-            }
-        }
 
-        for (int i = c / 2; i < c; i++) {
-            //find right first
-            int r = 0;
-            for (int k = i + 1; k < c; k++) {
-                if (v[k] > v[i]) {
-                    r = k + 1;
-                    break;
-                }
-            }
-            if (r == 0) {
-                m[i] = 0;
-            } else {
-                //find left
-                int l = 0;
-                for (int j = i - 1; j >= 0; j--) {
-                    if (v[j] > v[i]) {
-                        l = j + 1;
-                        break;
-                    }
-                }
-                m[i] = (long)l * (long)r;
-            }
+            m[i] = (long) (leftV[i] + 1) * (long) (rightV[i] + 1);
 
         }
 
