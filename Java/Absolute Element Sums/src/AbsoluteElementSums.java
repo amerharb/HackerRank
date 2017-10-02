@@ -7,7 +7,7 @@ public class AbsoluteElementSums {
         Scanner in = new Scanner(System.in);
 
         int n = in.nextInt();
-        int a[] = new int[n];
+        long a[] = new long[n];
         for (int i = 0; i < n; i++) {
             a[i] = in.nextInt();
         }
@@ -21,7 +21,7 @@ public class AbsoluteElementSums {
             for (int j = 0; j < n; j++) {
                 a[j] += x[i];
             }
-            int t = 0; //total 
+            long t = 0; //total 
             for (int j = 0; j < n; j++) {
                 t += Math.abs(a[j]);
             }
