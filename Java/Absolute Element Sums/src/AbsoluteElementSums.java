@@ -10,27 +10,25 @@ public class AbsoluteElementSums {
         int n = in.nextInt();
         long a[] = new long[n];
         for (int i = 0; i < n; i++) {
-            a[i] = in.nextInt();
+            a[i] = in.nextLong();
         }
+        Arrays.sort(a);
+        int fp = getFirst(a, 0L); //get first positive value in the array ;
+        long totalP = 0, totalN = 0; //total X, P, N
+        for (int i = 0; i < fp; i++) {
+            totalN += -a[i];
+        }
+        for (int i = fp; i < a.length; i++) {
+            totalP += a[i];
+        }
+
         int q = in.nextInt();
         int x[] = new int[q];
         for (int i = 0; i < q; i++) {
             x[i] = in.nextInt();
         }
 
-        Arrays.sort(a);
-        int fp = getFirst(a, 0L); //get first positive value in the array ;
-
-        long totalX = 0, totalP = 0, totalN = 0; //total X, P, N
-
-        for (int i = 0; i < fp; i++) {
-            totalN += -a[i];
-        }
-
-        for (int i = fp; i < a.length; i++) {
-            totalP += a[i];
-        }
-
+        long totalX = 0;
         for (int i = 0; i < q; i++) {
             totalX += x[i];
             int newFP = getFirst(a, -totalX);
@@ -38,7 +36,7 @@ public class AbsoluteElementSums {
 
             total += totalP + (totalX * (a.length - fp));
             total += totalN - (totalX * fp);
-            
+
             for (int j = newFP; j < fp; j++) {
                 total -= Math.abs(a[j]);
                 total += totalX;
@@ -51,9 +49,8 @@ public class AbsoluteElementSums {
             }
 
             System.out.println(total);
-
+            
         }
-
     }
 
     static int getFirst(long[] arr, long v) {
