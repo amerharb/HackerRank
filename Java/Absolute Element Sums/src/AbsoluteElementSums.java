@@ -1,19 +1,29 @@
-
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class AbsoluteElementSums {
 
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
+    public static void main(String[] args){
+        int n;
+        int[] a;
+        int q;
+        int[] x;
 
-        int n = in.nextInt();
-        long a[] = new long[n];
+        Scanner in = new Scanner(System.in);
+        n = in.nextInt();
+        a = new int[n];
         for (int i = 0; i < n; i++) {
-            a[i] = in.nextLong();
+            a[i] = in.nextInt();
         }
+
+        q = in.nextInt();
+        x = new int[q];
+        for (int i = 0; i < q; i++) {
+            x[i] = in.nextInt();
+        }
+
         Arrays.sort(a);
-        int fp = getFirst(a, 0L); //get first positive value in the array ;
+        int fp = getFirst(a, 0); //get first positive value in the array ;
         long totalP = 0, totalN = 0; //total X, P, N
         for (int i = 0; i < fp; i++) {
             totalN += -a[i];
@@ -22,13 +32,7 @@ public class AbsoluteElementSums {
             totalP += a[i];
         }
 
-        int q = in.nextInt();
-        int x[] = new int[q];
-        for (int i = 0; i < q; i++) {
-            x[i] = in.nextInt();
-        }
-
-        long totalX = 0;
+        int totalX = 0;
         for (int i = 0; i < q; i++) {
             totalX += x[i];
             int newFP = getFirst(a, -totalX);
@@ -49,11 +53,11 @@ public class AbsoluteElementSums {
             }
 
             System.out.println(total);
-            
+
         }
     }
 
-    static int getFirst(long[] arr, long v) {
+    static int getFirst(int[] arr, int v) {
         int k = Arrays.binarySearch(arr, v);
         if (k < 0) {
             return -k - 1;
