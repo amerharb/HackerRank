@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class AbsoluteElementSums {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         int n;
         int[] a;
         int q;
@@ -38,17 +38,14 @@ public class AbsoluteElementSums {
             int newFP = getFirst(a, -totalX);
             long total = 0;
 
-            total += totalP + (totalX * (a.length - fp));
-            total += totalN - (totalX * fp);
+            total += totalP + totalN + totalX * (a.length - fp - newFP);
 
             for (int j = newFP; j < fp; j++) {
                 total -= Math.abs(a[j]);
-                total += totalX;
                 total += Math.abs(a[j] + totalX);
             }
             for (int j = fp; j < newFP; j++) {
                 total -= Math.abs(a[j]);
-                total -= totalX;
                 total += Math.abs(a[j] + totalX);
             }
 
@@ -62,14 +59,19 @@ public class AbsoluteElementSums {
         if (k < 0) {
             return -k - 1;
         } else {
-            while (k > 0) {
-                if (arr[k - 1] == v) {
-                    k--;
-                } else {
-                    return k;
+            int b = Arrays.binarySearch(arr, 0, k, v - 1);
+            if (b < 0) {
+                return -b - 1;
+            } else {
+                while (k > 0) {
+                    if (arr[k - 1] == v) {
+                        k--;
+                    } else {
+                        return k;
+                    }
                 }
+                return k;
             }
-            return k;
         }
     }
 
