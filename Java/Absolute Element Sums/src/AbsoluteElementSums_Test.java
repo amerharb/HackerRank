@@ -21,18 +21,18 @@ public class AbsoluteElementSums_Test {
         final byte read = 1; //0-Scanner , 1- file (input.txt), 2- buffer
         final byte write = 1; //0 consle , 1- file (my_output.txt)
         final boolean check = true; //to compair my_output.txt with output.txt
-        final String inputFileName = "input_testcase10.txt";
-        final String outputFileName = "output_testcase10.txt";
+        final String inputFileName = "input10.txt";
+        final String outputFileName = "output10.txt";
 
         StopWatch sw = new StopWatch();
         sw.start();
 
         int n;
-        long[] a;
+        int[] a;
         int q;
-        long[] x;
+        int[] x;
         switch (read) {
-            case 2: { //read from concol
+            case 2: { //read from console
                 BufferedReader bi = new BufferedReader(new InputStreamReader(System.in));
                 String line;
                 line = bi.readLine();
@@ -40,7 +40,7 @@ public class AbsoluteElementSums_Test {
                 sw.start();
                 line = bi.readLine();
                 int i = 0;
-                a = new long[n];
+                a = new int[n];
                 for (String numStr : line.split("\\s")) {
                     a[i] = Integer.parseInt(numStr);
                     i++;
@@ -49,7 +49,7 @@ public class AbsoluteElementSums_Test {
                 q = Integer.parseInt(line);
                 line = bi.readLine();
                 i = 0;
-                x = new long[ q];
+                x = new int[q];
                 for (String numStr : line.split("\\s")) {
                     x[i] = Integer.parseInt(numStr);
                     i++;
@@ -61,13 +61,13 @@ public class AbsoluteElementSums_Test {
                 Scanner in = new Scanner(System.in);
                 n = in.nextInt();
                 sw.start();
-                a = new long[n];
+                a = new int[n];
                 for (int i = 0; i < n; i++) {
                     a[i] = in.nextInt();
                 }
 
                 q = in.nextInt();
-                x = new long[q];
+                x = new int[q];
                 for (int i = 0; i < q; i++) {
                     x[i] = in.nextInt();
                 }
@@ -86,7 +86,7 @@ public class AbsoluteElementSums_Test {
 
                     line = br.readLine();
                     l = line.split(" ");
-                    a = new long[n];
+                    a = new int[n];
                     for (int i = 0; i < n; i++) {
                         a[i] = Integer.parseInt(l[i]);
                     }
@@ -96,7 +96,7 @@ public class AbsoluteElementSums_Test {
 
                     line = br.readLine();
                     l = line.split(" ");
-                    x = new long[q];
+                    x = new int[q];
                     for (int i = 0; i < q; i++) {
                         x[i] = Integer.parseInt(l[i]);
                     }
@@ -106,8 +106,8 @@ public class AbsoluteElementSums_Test {
             }
             default: {
                 //stuiped code to satisfiy java
-                a = new long[0];
-                x = new long[0];
+                a = new int[0];
+                x = new int[0];
                 n = 0;
                 q = 0;
                 System.exit(0);
@@ -115,57 +115,81 @@ public class AbsoluteElementSums_Test {
         }
 
         Arrays.sort(a);
+        aValues[] aa = aggregateRepeating(a);
+        a = null; //empty memory
+
         StopWatch fsw = new StopWatch();
         fsw.resume();
-        int fp = getFirst(a, 0); //get first positive value in the array ;
+        //int fp = getFirst(a, 0); //get first positive value in the array ;
+        int fp = getFirst(aa, new aValues(0, 0)); //get first positive value in the array ;
         fsw.pause();
         long totalP = 0, totalN = 0; //total X, P, N
         for (int i = 0; i < fp; i++) {
-            totalN += -a[i];
+            if (aa[i].total() >= 0) {
+                System.out.println("ERROR");
+                System.exit(0);
+            }
+            totalN += -aa[i].total();
         }
-        for (int i = fp; i < a.length; i++) {
-            totalP += a[i];
+        for (int i = fp; i < aa.length; i++) {
+            if (aa[i].total() < 0) {
+                System.out.println("ERROR");
+                System.exit(0);
+            }
+            totalP += aa[i].total();
         }
         System.out.println("find total of a array: " + sw.stopAndStart());
 
-        long totalX = 0;
+        int totalX = 0;
         StringBuilder sb = new StringBuilder(q * 2); //at least 2 char for each line
         StopWatch L1 = new StopWatch();
         StopWatch L2 = new StopWatch();
-        
+
         for (int i = 0; i < q; i++) {
             totalX += x[i];
             fsw.resume();
-            int newFP = getFirst(a, -totalX);
+            // int newFP = getFirst(a, -totalX);
+            int newFP = getFirst(aa, new aValues(-totalX, 0));
             fsw.pause();
-            //check result 
-            if (newFP > 0 && newFP < a.length) {
-                if (a[newFP - 1] >= a[newFP] || a[newFP + 1] < a[newFP]) {
-                    System.out.println("ERROR in get First");
-                }
-            }
 
             long total = 0;
 
-//            total += totalP + (totalX * (a.length - fp));
+//            total += totalP + (totalX * (aa.length - fp));
 //            total += totalN - (totalX * fp);
 //            total += totalX * (fp - newFP);
-            total += totalP + totalN + totalX * (a.length - fp - newFP);
+//            total += totalP + ((long) totalX * (aa[aa.length - 1].rs - aa[fp].rs));
+//            total += totalN - ((long) totalX * aa[fp].rs);
+//            total += (long) totalX * (aa[fp].rs - aa[newFP].rs);
+//            total += totalP + totalN + ((long) totalX * (long)(aa.length - fp - newFP));
+            int NC; //Negative count
+            if (fp > 0) {
+                NC = aa[fp - 1].rs;
+            } else {
+                NC = 0;
+            }
 
+            int nNC;//new Negative count
+            if (newFP > 0) {
+                nNC = aa[newFP - 1].rs;
+            } else {
+                nNC = 0;
+            }
+
+            total += totalP + totalN + ((long) totalX * (long) (aa[aa.length - 1].rs - NC - nNC));
             L1.resume();
             for (int j = newFP; j < fp; j++) {
                 count_L1++;
-                total -= Math.abs(a[j]);
+                total -= Math.abs(aa[j].total());
 //                total += totalX;
-                total += Math.abs(a[j] + totalX);
+                total += Math.abs(aa[j].total() + (totalX * aa[j].r));
             }
             L1.pause();
             L2.resume();
             for (int j = fp; j < newFP; j++) {
                 count_L2++;
-                total -= Math.abs(a[j]);
+                total -= Math.abs(aa[j].total());
 //                total -= totalX;
-                total += Math.abs(a[j] + totalX);
+                total += Math.abs(aa[j].total() + (totalX * aa[j].r));
             }
             L2.pause();
 
@@ -199,8 +223,7 @@ public class AbsoluteElementSums_Test {
                 System.out.println("time to compair files: " + sw.stopAndStart());
             }
         }
-        
-        System.out.println("time of find first:" + FIND_FIRST_SW.getPeriod());
+
         System.out.println("time of find first:" + fsw.getPeriod());
         System.out.println("found A :" + count_foundA);
         System.out.println("found B :" + count_foundB);
@@ -208,42 +231,37 @@ public class AbsoluteElementSums_Test {
 
     }
 
-    static final StopWatch FIND_FIRST_SW = new StopWatch();
-
-    static {
-        FIND_FIRST_SW.start();
-    }
-
-    static int getFirst(long[] arr, long v) throws InterruptedException {
-        FIND_FIRST_SW.resume();
+    static int getFirst(aValues[] arr, aValues v) throws InterruptedException {
         int k = Arrays.binarySearch(arr, v);
         if (k < 0) {
-            count_foundA++;
-            FIND_FIRST_SW.pause();
+            return -k - 1;
+        } else {
+            return k;
+        }
+    }
+
+    /*    
+    static int getFirst(int[] arr, int v) {
+        int k = Arrays.binarySearch( arr, v);
+        if (k < 0) {
             return -k - 1;
         } else {
             int b = Arrays.binarySearch(arr, 0, k, v - 1);
             if (b < 0) {
-                count_foundB++;
-                FIND_FIRST_SW.pause();
                 return -b - 1;
-
             } else {
-                count_foundC++;
                 while (k > 0) {
                     if (arr[k - 1] == v) {
                         k--;
                     } else {
-                        FIND_FIRST_SW.pause();
                         return k;
                     }
                 }
-                FIND_FIRST_SW.pause();
                 return k;
             }
         }
     }
-
+     */
     static boolean compareFile(String file1, String file2) throws Exception {
 
         File f1 = new File(file1); //OUTFILE
@@ -268,6 +286,51 @@ public class AbsoluteElementSums_Test {
         reader2.close();
         return flag;
 
+    }
+
+    static aValues[] aggregateRepeating(int[] arr) {
+
+        aValues[] t = new aValues[Math.min(arr.length, 4001)];
+
+        int j = 0;
+        t[j] = new aValues(arr[0], 0);
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] == arr[i - 1]) {
+                t[j].r++;
+                t[j].rs++;
+            } else {
+                t[++j] = new aValues(arr[i], t[j - 1].rs);
+            }
+        }
+        aValues[] r = new aValues[j + 1];
+        System.arraycopy(t, 0, r, 0, j + 1);
+        return r;
+    }
+
+    private static class aValues implements Comparable<aValues> {
+
+        private final int a;
+        int r = 1;
+        int rs;
+
+        public int total() {
+            return a * r;
+        }
+
+        /*
+        public aValues(int a) {
+            this.a = a;
+        }
+         */
+        public aValues(int a, int prevRS) {
+            this.a = a;
+            this.rs = prevRS + 1;
+        }
+
+        @Override
+        public int compareTo(aValues o) {
+            return this.a - o.a;
+        }
     }
 
 }
