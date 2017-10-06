@@ -12,7 +12,7 @@ import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class AbsoluteElementSums_Test {
+public class AbsoluteElementSums_Test_temp{
 
     static int count_foundA = 0, count_foundB = 0, count_foundC = 0;
     static int count_L1 = 0, count_L2 = 0;
@@ -21,18 +21,18 @@ public class AbsoluteElementSums_Test {
         final byte read = 1; //0-Scanner , 1- file (input.txt), 2- buffer
         final byte write = 1; //0 consle , 1- file (my_output.txt)
         final boolean check = true; //to compair my_output.txt with output.txt
-        final String inputFileName = "input10.txt";
-        final String outputFileName = "output10.txt";
+        final String inputFileName = "input06.txt";
+        final String outputFileName = "output06.txt";
 
         StopWatch sw = new StopWatch();
         sw.start();
 
         int n;
-        int[] a;
+        long[] a;
         int q;
-        int[] x;
+        long[] x;
         switch (read) {
-            case 2: { //read from console
+            case 2: { //read from concol
                 BufferedReader bi = new BufferedReader(new InputStreamReader(System.in));
                 String line;
                 line = bi.readLine();
@@ -40,7 +40,7 @@ public class AbsoluteElementSums_Test {
                 sw.start();
                 line = bi.readLine();
                 int i = 0;
-                a = new int[n];
+                a = new long[n];
                 for (String numStr : line.split("\\s")) {
                     a[i] = Integer.parseInt(numStr);
                     i++;
@@ -49,7 +49,7 @@ public class AbsoluteElementSums_Test {
                 q = Integer.parseInt(line);
                 line = bi.readLine();
                 i = 0;
-                x = new int[q];
+                x = new long[q];
                 for (String numStr : line.split("\\s")) {
                     x[i] = Integer.parseInt(numStr);
                     i++;
@@ -61,13 +61,13 @@ public class AbsoluteElementSums_Test {
                 Scanner in = new Scanner(System.in);
                 n = in.nextInt();
                 sw.start();
-                a = new int[n];
+                a = new long[n];
                 for (int i = 0; i < n; i++) {
                     a[i] = in.nextInt();
                 }
 
                 q = in.nextInt();
-                x = new int[q];
+                x = new long[q];
                 for (int i = 0; i < q; i++) {
                     x[i] = in.nextInt();
                 }
@@ -86,7 +86,7 @@ public class AbsoluteElementSums_Test {
 
                     line = br.readLine();
                     l = line.split(" ");
-                    a = new int[n];
+                    a = new long[n];
                     for (int i = 0; i < n; i++) {
                         a[i] = Integer.parseInt(l[i]);
                     }
@@ -96,7 +96,7 @@ public class AbsoluteElementSums_Test {
 
                     line = br.readLine();
                     l = line.split(" ");
-                    x = new int[q];
+                    x = new long[q];
                     for (int i = 0; i < q; i++) {
                         x[i] = Integer.parseInt(l[i]);
                     }
@@ -106,8 +106,8 @@ public class AbsoluteElementSums_Test {
             }
             default: {
                 //stuiped code to satisfiy java
-                a = new int[0];
-                x = new int[0];
+                a = new long[0];
+                x = new long[0];
                 n = 0;
                 q = 0;
                 System.exit(0);
@@ -115,13 +115,11 @@ public class AbsoluteElementSums_Test {
         }
 
         Arrays.sort(a);
-        aValues[] aa = aggregateRepeating(a);
-        a = null; //empty memory
+        aValues_temp[] aa = aggregateRepeating(a);
 
         StopWatch fsw = new StopWatch();
         fsw.resume();
-        //int fp = getFirst(a, 0); //get first positive value in the array ;
-        int fp = getFirst(aa, new aValues(0, 0)); //get first positive value in the array ;
+        int fp = getFirst(aa, new aValues_temp(0)); //get first positive value in the array ;
         fsw.pause();
         long totalP = 0, totalN = 0; //total X, P, N
         for (int i = 0; i < fp; i++) {
@@ -132,7 +130,7 @@ public class AbsoluteElementSums_Test {
         }
         System.out.println("find total of a array: " + sw.stopAndStart());
 
-        int totalX = 0;
+        long totalX = 0;
         StringBuilder sb = new StringBuilder(q * 2); //at least 2 char for each line
         StopWatch L1 = new StopWatch();
         StopWatch L2 = new StopWatch();
@@ -140,40 +138,21 @@ public class AbsoluteElementSums_Test {
         for (int i = 0; i < q; i++) {
             totalX += x[i];
             fsw.resume();
-            // int newFP = getFirst(a, -totalX);
-            int newFP = getFirst(aa, new aValues(-totalX, 0));
+            int newFP = getFirst(aa, new aValues_temp(-totalX));
             fsw.pause();
 
             long total = 0;
+            total += totalP + (totalX * (a.length - fp));
+            total += totalN - (totalX * fp);
+            total += totalX * (fp - newFP);
+            //long total = totalP + totalN + totalX * (aa.length - fp - newFP);
 
-//            total += totalP + (totalX * (aa.length - fp));
-//            total += totalN - (totalX * fp);
-//            total += totalX * (fp - newFP);
-//            total += totalP + ((long) totalX * (aa[aa.length - 1].rs - aa[fp].rs));
-//            total += totalN - ((long) totalX * aa[fp].rs);
-//            total += (long) totalX * (aa[fp].rs - aa[newFP].rs);
-//            total += totalP + totalN + ((long) totalX * (long)(aa.length - fp - newFP));
-            int NC; //Negative count
-            if (fp > 0) {
-                NC = aa[fp - 1].rs;
-            } else {
-                NC = 0;
-            }
-
-            int nNC;//new Negative count
-            if (newFP > 0) {
-                nNC = aa[newFP - 1].rs;
-            } else {
-                nNC = 0;
-            }
-
-            total += totalP + totalN + ((long) totalX * (long) (aa[aa.length - 1].rs - NC - nNC));
             L1.resume();
             for (int j = newFP; j < fp; j++) {
                 count_L1++;
                 total -= Math.abs(aa[j].total());
 //                total += totalX;
-                total += Math.abs(aa[j].total() + (totalX * aa[j].r));
+                total += Math.abs(aa[j].total() + totalX);
             }
             L1.pause();
             L2.resume();
@@ -181,7 +160,7 @@ public class AbsoluteElementSums_Test {
                 count_L2++;
                 total -= Math.abs(aa[j].total());
 //                total -= totalX;
-                total += Math.abs(aa[j].total() + (totalX * aa[j].r));
+                total += Math.abs(aa[j].total() + totalX);
             }
             L2.pause();
 
@@ -216,14 +195,23 @@ public class AbsoluteElementSums_Test {
             }
         }
 
+        System.out.println("time of find first:" + FIND_FIRST_SW.getPeriod());
         System.out.println("time of find first:" + fsw.getPeriod());
         System.out.println("found A :" + count_foundA);
         System.out.println("found B :" + count_foundB);
         System.out.println("found C :" + count_foundC);
+        System.out.println("A.lenght = " + a.length);
+        System.out.println("AA.lenght = " + aa.length);
 
     }
 
-    static int getFirst(aValues[] arr, aValues v) throws InterruptedException {
+    static final StopWatch FIND_FIRST_SW = new StopWatch();
+
+    static {
+        FIND_FIRST_SW.start();
+    }
+
+    static int getFirst(aValues_temp[] arr, aValues_temp v) throws InterruptedException {
         int k = Arrays.binarySearch(arr, v);
         if (k < 0) {
             return -k - 1;
@@ -231,28 +219,38 @@ public class AbsoluteElementSums_Test {
             return k;
         }
     }
-  
-    static int getFirst(int[] arr, int v) {
-        int k = Arrays.binarySearch( arr, v);
+
+    /*
+    static int getFirstLong(long[] arr, long v) throws InterruptedException {
+        FIND_FIRST_SW.resume();
+        int k = Arrays.binarySearch(arr, v);
         if (k < 0) {
+            count_foundA++;
+            FIND_FIRST_SW.pause();
             return -k - 1;
         } else {
             int b = Arrays.binarySearch(arr, 0, k, v - 1);
             if (b < 0) {
+                count_foundB++;
+                FIND_FIRST_SW.pause();
                 return -b - 1;
+
             } else {
+                count_foundC++;
                 while (k > 0) {
                     if (arr[k - 1] == v) {
                         k--;
                     } else {
+                        FIND_FIRST_SW.pause();
                         return k;
                     }
                 }
+                FIND_FIRST_SW.pause();
                 return k;
             }
         }
     }
-
+     */
     static boolean compareFile(String file1, String file2) throws Exception {
 
         File f1 = new File(file1); //OUTFILE
@@ -279,48 +277,41 @@ public class AbsoluteElementSums_Test {
 
     }
 
-    static aValues[] aggregateRepeating(int[] arr) {
+    static aValues_temp[] aggregateRepeating(long[] arr) {
 
-        aValues[] t = new aValues[Math.min(arr.length, 4001)];
+        aValues_temp[] t = new aValues_temp[Math.min(arr.length, 4001)];
 
         int j = 0;
-        t[j] = new aValues(arr[0], 0);
+        t[j] = new aValues_temp(arr[0]);
         for (int i = 1; i < arr.length; i++) {
             if (arr[i] == arr[i - 1]) {
                 t[j].r++;
-                t[j].rs++;
             } else {
-                t[++j] = new aValues(arr[i], t[j - 1].rs);
+                t[++j] = new aValues_temp(arr[i]);
             }
         }
-        aValues[] r = new aValues[j + 1];
+        aValues_temp[] r = new aValues_temp[j + 1];
         System.arraycopy(t, 0, r, 0, j + 1);
         return r;
     }
 
-    private static class aValues implements Comparable<aValues> {
+    private static class aValues_temp implements Comparable<aValues_temp> {
 
-        private final int a;
+        final long a;
         int r = 1;
-        int rs;
 
-        public int total() {
+        public long total() {
             return a * r;
         }
 
-        /*
-        public aValues(int a) {
+        public aValues_temp(long a) {
             this.a = a;
-        }
-         */
-        public aValues(int a, int prevRS) {
-            this.a = a;
-            this.rs = prevRS + 1;
         }
 
         @Override
-        public int compareTo(aValues o) {
-            return this.a - o.a;
+        public int compareTo(aValues_temp o) {
+            //return this.a - o.a;
+            return Long.compare(this.a, o.a);
         }
     }
 
