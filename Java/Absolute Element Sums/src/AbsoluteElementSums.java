@@ -1,3 +1,4 @@
+
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -58,12 +59,10 @@ public class AbsoluteElementSums {
             total += totalP + totalN + ((long) totalX * (long) (aa[aa.length - 1].rs - NC - nNC));
 
             for (int j = newFP; j < fp; j++) {
-                total -= aa[j].absTotal;
-                total += Math.abs(aa[j].total + (totalX * aa[j].r));
+                total += Math.abs(aa[j].total + (totalX * aa[j].r)) - aa[j].absTotal;
             }
             for (int j = fp; j < newFP; j++) {
-                total -= aa[j].absTotal;
-                total += Math.abs(aa[j].total + (totalX * aa[j].r));
+                total += Math.abs(aa[j].total + (totalX * aa[j].r)) - aa[j].absTotal;
             }
 
             System.out.println(total);
@@ -94,6 +93,9 @@ public class AbsoluteElementSums {
         }
         aValues[] r = new aValues[j + 1];
         System.arraycopy(t, 0, r, 0, j + 1);
+        for (aValues v : r) {
+            v.updateTotal();
+        }
         return r;
     }
 
@@ -101,17 +103,20 @@ public class AbsoluteElementSums {
 
         private final int a;
         private int r = 1;
-        private int rs; 
+        private int rs;
         int total;
         int absTotal;
 
-        public void inc(){
+        public void inc() {
             r++;
             rs++;
-            total += a;
-            absTotal += Math.abs(a);
         }
-        
+
+        public void updateTotal() {
+            total = a * r;
+            absTotal = Math.abs(total);
+        }
+
         public aValues(int a, int prevRS) {
             this.a = a;
             this.rs = prevRS + 1;
