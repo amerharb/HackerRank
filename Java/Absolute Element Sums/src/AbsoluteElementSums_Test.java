@@ -21,8 +21,8 @@ public class AbsoluteElementSums_Test {
         final byte read = 1; //0-Scanner , 1- file (input.txt), 2- buffer
         final byte write = 1; //0 consle , 1- file (my_output.txt)
         final boolean check = true; //to compair my_output.txt with output.txt
-        final String inputFileName = "input12.txt";
-        final String outputFileName = "output12.txt";
+        final String inputFileName = "input10.txt";
+        final String outputFileName = "output10.txt";
 
         StopWatch sw = new StopWatch();
         sw.start();
@@ -177,18 +177,18 @@ public class AbsoluteElementSums_Test {
             for (int j = newFP; j < fp; j++) {
                 count_L1++;
 //                total -= Math.abs(aa[j].total);
-                total -= aa[j].absTotal;
 //                total += totalX;
-                total += Math.abs(aa[j].total + (totalX * aa[j].r));
+//                total -= aa[j].absTotal;
+                total += Math.abs(aa[j].total + (totalX * aa[j].r)) - aa[j].absTotal;
             }
             L1.pause();
             L2.resume();
             for (int j = fp; j < newFP; j++) {
                 count_L2++;
 //                total -= Math.abs(aa[j].total);
-                total -= aa[j].absTotal;
 //                total -= totalX;
-                total += Math.abs(aa[j].total + (totalX * aa[j].r));
+                //total -= aa[j].absTotal;
+                total += Math.abs(aa[j].total + (totalX * aa[j].r)) - aa[j].absTotal;
             }
             L2.pause();
             A.pause();
@@ -303,6 +303,9 @@ public class AbsoluteElementSums_Test {
         }
         aValues[] r = new aValues[j + 1];
         System.arraycopy(t, 0, r, 0, j + 1);
+        for (aValues v:r) {
+            v.updateTotal();
+        }
         return r;
     }
 
@@ -317,8 +320,6 @@ public class AbsoluteElementSums_Test {
         public void inc(){
             r++;
             rs++;
-            total += a;
-            absTotal += Math.abs(a);
         }
         
 //        public int total() {
@@ -333,10 +334,13 @@ public class AbsoluteElementSums_Test {
         public aValues(int a, int prevRS) {
             this.a = a;
             this.rs = prevRS + 1;
-            this.total = a;
-            this.absTotal = Math.abs(a);
         }
 
+        public void updateTotal(){
+            this.total = a * r;
+            this.absTotal = Math.abs(this.total);            
+        }
+        
         @Override
         public int compareTo(aValues o) {
             return this.a - o.a;
