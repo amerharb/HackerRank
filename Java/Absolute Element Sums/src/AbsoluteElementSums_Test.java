@@ -125,10 +125,10 @@ public class AbsoluteElementSums_Test {
         fsw.pause();
         long totalP = 0, totalN = 0; //total X, P, N
         for (int i = 0; i < fp; i++) {
-            totalN += -aa[i].total();
+            totalN += -aa[i].total;
         }
         for (int i = fp; i < aa.length; i++) {
-            totalP += aa[i].total();
+            totalP += aa[i].total;
         }
         System.out.println("find total of a array: " + sw.stopAndStart());
 
@@ -176,17 +176,19 @@ public class AbsoluteElementSums_Test {
             L1.resume();
             for (int j = newFP; j < fp; j++) {
                 count_L1++;
-                total -= Math.abs(aa[j].total());
+//                total -= Math.abs(aa[j].total);
+                total -= aa[j].absTotal;
 //                total += totalX;
-                total += Math.abs(aa[j].total() + (totalX * aa[j].r));
+                total += Math.abs(aa[j].total + (totalX * aa[j].r));
             }
             L1.pause();
             L2.resume();
             for (int j = fp; j < newFP; j++) {
                 count_L2++;
-                total -= Math.abs(aa[j].total());
+//                total -= Math.abs(aa[j].total);
+                total -= aa[j].absTotal;
 //                total -= totalX;
-                total += Math.abs(aa[j].total() + (totalX * aa[j].r));
+                total += Math.abs(aa[j].total + (totalX * aa[j].r));
             }
             L2.pause();
             A.pause();
@@ -309,15 +311,19 @@ public class AbsoluteElementSums_Test {
         private final int a;
         private int r = 1;
         private int rs;
+        private int total;
+        private int absTotal;
 
         public void inc(){
             r++;
             rs++;
+            total += a;
+            absTotal += Math.abs(a);
         }
         
-        public int total() {
-            return a * r;
-        }
+//        public int total() {
+//            return a * r;
+//        }
 
         /*
         public aValues(int a) {
@@ -327,6 +333,8 @@ public class AbsoluteElementSums_Test {
         public aValues(int a, int prevRS) {
             this.a = a;
             this.rs = prevRS + 1;
+            this.total = a;
+            this.absTotal = Math.abs(a);
         }
 
         @Override
