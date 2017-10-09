@@ -26,7 +26,7 @@ public class AbsoluteElementSums {
         aValues[] aa = aggregateRepeating(a);
         a = null; //empty memory
 
-        int fp = getFirst(aa, new aValues(0, 0)); //get first positive value in the array ;
+        int fp = getFirst(aa, 0); //get first positive value in the array ;
         long totalP = 0, totalN = 0; //total X, P, N
         for (int i = 0; i < fp; i++) {
             totalN += -aa[i].total();
@@ -35,17 +35,18 @@ public class AbsoluteElementSums {
             totalP += aa[i].total();
         }
 
+        int NC; //Negative count
+        if (fp > 0) {
+            NC = aa[fp - 1].rs;
+        } else {
+            NC = 0;
+        }
+
         int totalX = 0;
         for (int i = 0; i < q; i++) {
             totalX += x[i];
-            int newFP = getFirst(aa, new aValues(-totalX, 0));
+            int newFP = getFirst(aa, -totalX);
             long total = 0;
-            int NC; //Negative count
-            if (fp > 0) {
-                NC = aa[fp - 1].rs;
-            } else {
-                NC = 0;
-            }
 
             int nNC;//new Negative count
             if (newFP > 0) {
@@ -69,8 +70,8 @@ public class AbsoluteElementSums {
         }
     }
 
-    static int getFirst(aValues[] arr, aValues v) {
-        int k = Arrays.binarySearch(arr, v);
+    static int getFirst(aValues[] arr, int v) {
+        int k = Arrays.binarySearch(arr, new aValues(v, 0));
         if (k < 0) {
             return -k - 1;
         } else {
