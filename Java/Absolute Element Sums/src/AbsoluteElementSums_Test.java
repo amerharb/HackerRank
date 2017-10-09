@@ -21,8 +21,8 @@ public class AbsoluteElementSums_Test {
         final byte read = 1; //0-Scanner , 1- file (input.txt), 2- buffer
         final byte write = 1; //0 consle , 1- file (my_output.txt)
         final boolean check = true; //to compair my_output.txt with output.txt
-        final String inputFileName = "input10.txt";
-        final String outputFileName = "output10.txt";
+        final String inputFileName = "input12.txt";
+        final String outputFileName = "output12.txt";
 
         StopWatch sw = new StopWatch();
         sw.start();
@@ -56,7 +56,7 @@ public class AbsoluteElementSums_Test {
                 }
                 System.out.println("Reading using buffer: " + sw.stopAndStart());
                 break;
-            } 
+            }
             case 0: {
                 Scanner in = new Scanner(System.in);
                 n = in.nextInt();
@@ -169,17 +169,24 @@ public class AbsoluteElementSums_Test {
             } else {
                 nNC = 0;
             }
-            
+
             long total = totalPN + ((long) totalX * (long) (LNC - nNC));
             M.pause();
-            
+
             L1.resume();
             for (int j = newFP; j < fp; j++) {
                 count_L1++;
 //                total -= Math.abs(aa[j].total);
 //                total += totalX;
 //                total -= aa[j].absTotal;
-                total += Math.abs(aa[j].total + (totalX * aa[j].r)) - aa[j].absTotal;
+                //aa[j].total is negative here the other is pos
+//                total += Math.abs(aa[j].total + (totalX * aa[j].r)) - aa[j].absTotal;
+                long tXa = (long)totalX * (long)aa[j].r;
+                if (aa[j].total < tXa) {
+                    total += aa[j].total + tXa - aa[j].absTotal;
+                } else {
+                    total += -aa[j].total - tXa - aa[j].absTotal;
+                }
             }
             L1.pause();
             L2.resume();
@@ -188,11 +195,17 @@ public class AbsoluteElementSums_Test {
 //                total -= Math.abs(aa[j].total);
 //                total -= totalX;
                 //total -= aa[j].absTotal;
-                total += Math.abs(aa[j].total + (totalX * aa[j].r)) - aa[j].absTotal;
+//                total += Math.abs(aa[j].total + (totalX * aa[j].r)) - aa[j].absTotal;
+                long tXa = (long)totalX * (long)aa[j].r;
+                if (aa[j].total < tXa) {
+                    total += aa[j].total + tXa - aa[j].absTotal;
+                } else {
+                    total += -aa[j].total - tXa - aa[j].absTotal;
+                }
             }
             L2.pause();
             A.pause();
-            
+
             sb.append(total);
             sb.append("\n");
 
@@ -203,7 +216,7 @@ public class AbsoluteElementSums_Test {
         System.out.println("L2: " + L2.getPeriod() + "\t  count L1: " + count_L2);
         System.out.println("M = " + M.getPeriod());
         System.out.println("A = " + A.getPeriod());
-        
+
         if (write == 0) {
             System.out.print(sb);
             System.out.println("time to write to console: " + sw.stopAndStart());
@@ -303,7 +316,7 @@ public class AbsoluteElementSums_Test {
         }
         aValues[] r = new aValues[j + 1];
         System.arraycopy(t, 0, r, 0, j + 1);
-        for (aValues v:r) {
+        for (aValues v : r) {
             v.updateTotal();
         }
         return r;
@@ -317,11 +330,11 @@ public class AbsoluteElementSums_Test {
         private int total;
         private int absTotal;
 
-        public void inc(){
+        public void inc() {
             r++;
             rs++;
         }
-        
+
 //        public int total() {
 //            return a * r;
 //        }
@@ -336,11 +349,11 @@ public class AbsoluteElementSums_Test {
             this.rs = prevRS + 1;
         }
 
-        public void updateTotal(){
+        public void updateTotal() {
             this.total = a * r;
-            this.absTotal = Math.abs(this.total);            
+            this.absTotal = Math.abs(this.total);
         }
-        
+
         @Override
         public int compareTo(aValues o) {
             return this.a - o.a;
