@@ -29,10 +29,10 @@ public class AbsoluteElementSums {
         int fp = getFirst(aa, 0); //get first positive value in the array ;
         long totalP = 0, totalN = 0; //total X, P, N
         for (int i = 0; i < fp; i++) {
-            totalN += -aa[i].total();
+            totalN += -aa[i].total;
         }
         for (int i = fp; i < aa.length; i++) {
-            totalP += aa[i].total();
+            totalP += aa[i].total;
         }
 
         int NC; //Negative count
@@ -58,12 +58,12 @@ public class AbsoluteElementSums {
             total += totalP + totalN + ((long) totalX * (long) (aa[aa.length - 1].rs - NC - nNC));
 
             for (int j = newFP; j < fp; j++) {
-                total -= Math.abs(aa[j].total());
-                total += Math.abs(aa[j].total() + (totalX * aa[j].r));
+                total -= aa[j].absTotal;
+                total += Math.abs(aa[j].total + (totalX * aa[j].r));
             }
             for (int j = fp; j < newFP; j++) {
-                total -= Math.abs(aa[j].total());
-                total += Math.abs(aa[j].total() + (totalX * aa[j].r));
+                total -= aa[j].absTotal;
+                total += Math.abs(aa[j].total + (totalX * aa[j].r));
             }
 
             System.out.println(total);
@@ -87,8 +87,7 @@ public class AbsoluteElementSums {
         t[j] = new aValues(arr[0], 0);
         for (int i = 1; i < arr.length; i++) {
             if (arr[i] == arr[i - 1]) {
-                t[j].r++;
-                t[j].rs++;
+                t[j].inc();
             } else {
                 t[++j] = new aValues(arr[i], t[j - 1].rs);
             }
@@ -101,16 +100,23 @@ public class AbsoluteElementSums {
     private static class aValues implements Comparable<aValues> {
 
         private final int a;
-        int r = 1;
-        int rs;
+        private int r = 1;
+        private int rs; 
+        int total;
+        int absTotal;
 
-        public int total() {
-            return a * r;
+        public void inc(){
+            r++;
+            rs++;
+            total += a;
+            absTotal += Math.abs(a);
         }
-
+        
         public aValues(int a, int prevRS) {
             this.a = a;
             this.rs = prevRS + 1;
+            this.total = a;
+            this.absTotal = Math.abs(a);
         }
 
         @Override
