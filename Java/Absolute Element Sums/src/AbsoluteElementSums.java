@@ -59,10 +59,20 @@ public class AbsoluteElementSums {
             total += totalP + totalN + ((long) totalX * (long) (aa[aa.length - 1].rs - NC - nNC));
 
             for (int j = newFP; j < fp; j++) {
-                total += Math.abs(aa[j].total + (totalX * aa[j].r)) - aa[j].absTotal;
+                long tXa = (long)totalX * (long)aa[j].r;
+                if (aa[j].total < tXa) {
+                    total += aa[j].total + tXa - aa[j].absTotal;
+                } else {
+                    total += -aa[j].total - tXa - aa[j].absTotal;
+                }
             }
             for (int j = fp; j < newFP; j++) {
-                total += Math.abs(aa[j].total + (totalX * aa[j].r)) - aa[j].absTotal;
+                long tXa = (long)totalX * (long)aa[j].r;
+                if (aa[j].total < tXa) {
+                    total += aa[j].total + tXa - aa[j].absTotal;
+                } else {
+                    total += -aa[j].total - tXa - aa[j].absTotal;
+                }
             }
 
             System.out.println(total);
