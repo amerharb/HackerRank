@@ -1,3 +1,4 @@
+
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -25,7 +26,6 @@ public class AbsoluteElementSums {
         Arrays.sort(a);
         aValues[] aa = aggregateRepeating(a);
         a = null; //empty memory
-        System.gc();
 
         int fp = getFirst(aa, 0); //get first positive value in the array ;
         long totalP = 0, totalN = 0; //total X, P, N
@@ -60,20 +60,10 @@ public class AbsoluteElementSums {
             long total = totalPN + ((long) totalX * (long) (PC - nNC));
 
             for (int j = newFP; j < fp; j++) {
-                long tXa = (long) totalX * (long) aa[j].r;
-                if (aa[j].total < tXa) {
-                    total += 2 * aa[j].total + tXa;
-                } else {
-                    total -= tXa;
-                }
+                total += aa[j].total + aa[j].total + (long) totalX * (long) aa[j].r;
             }
             for (int j = fp; j < newFP; j++) {
-                long tXa = (long) totalX * (long) aa[j].r;
-                if (aa[j].total < tXa) {
-                    total += tXa;
-                } else {
-                    total += -2 * aa[j].total - tXa;
-                }
+                total -= aa[j].total + aa[j].total + (long) totalX * (long) aa[j].r;
             }
 
             System.out.println(total);
@@ -90,7 +80,7 @@ public class AbsoluteElementSums {
     }
 
     static aValues[] aggregateRepeating(int[] arr) {
-        
+
         aValues[] t = new aValues[(arr.length <= 4001) ? arr.length : 4001];
 
         int j = 0;
