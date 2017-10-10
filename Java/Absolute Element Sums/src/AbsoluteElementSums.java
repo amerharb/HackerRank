@@ -1,4 +1,3 @@
-
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -26,6 +25,7 @@ public class AbsoluteElementSums {
         Arrays.sort(a);
         aValues[] aa = aggregateRepeating(a);
         a = null; //empty memory
+        System.gc();
 
         int fp = getFirst(aa, 0); //get first positive value in the array ;
         long totalP = 0, totalN = 0; //total X, P, N
@@ -36,18 +36,19 @@ public class AbsoluteElementSums {
             totalP += aa[i].total;
         }
 
-        int NC; //Negative count
+        final int NC; //Negative count
         if (fp > 0) {
             NC = aa[fp - 1].rs;
         } else {
             NC = 0;
         }
-
+        final int PC = aa[aa.length - 1].rs - NC; //positive count
+        final long totalPN = totalP + totalN;
         int totalX = 0;
+
         for (int i = 0; i < q; i++) {
             totalX += x[i];
             int newFP = getFirst(aa, -totalX);
-            long total = 0;
 
             int nNC;//new Negative count
             if (newFP > 0) {
@@ -56,22 +57,22 @@ public class AbsoluteElementSums {
                 nNC = 0;
             }
 
-            total += totalP + totalN + ((long) totalX * (long) (aa[aa.length - 1].rs - NC - nNC));
+            long total = totalPN + ((long) totalX * (long) (PC - nNC));
 
             for (int j = newFP; j < fp; j++) {
-                long tXa = (long)totalX * (long)aa[j].r;
+                long tXa = (long) totalX * (long) aa[j].r;
                 if (aa[j].total < tXa) {
-                    total += aa[j].total + tXa - aa[j].absTotal;
+                    total += 2 * aa[j].total + tXa;
                 } else {
-                    total += -aa[j].total - tXa - aa[j].absTotal;
+                    total -= tXa;
                 }
             }
             for (int j = fp; j < newFP; j++) {
-                long tXa = (long)totalX * (long)aa[j].r;
+                long tXa = (long) totalX * (long) aa[j].r;
                 if (aa[j].total < tXa) {
-                    total += aa[j].total + tXa - aa[j].absTotal;
+                    total += tXa;
                 } else {
-                    total += -aa[j].total - tXa - aa[j].absTotal;
+                    total += -2 * aa[j].total - tXa;
                 }
             }
 
@@ -89,8 +90,8 @@ public class AbsoluteElementSums {
     }
 
     static aValues[] aggregateRepeating(int[] arr) {
-
-        aValues[] t = new aValues[Math.min(arr.length, 4001)];
+        
+        aValues[] t = new aValues[(arr.length <= 4001) ? arr.length : 4001];
 
         int j = 0;
         t[j] = new aValues(arr[0], 0);
@@ -115,7 +116,6 @@ public class AbsoluteElementSums {
         private int r = 1;
         private int rs;
         int total;
-        int absTotal;
 
         public void inc() {
             r++;
@@ -124,14 +124,13 @@ public class AbsoluteElementSums {
 
         public void updateTotal() {
             total = a * r;
-            absTotal = Math.abs(total);
+
         }
 
         public aValues(int a, int prevRS) {
             this.a = a;
             this.rs = prevRS + 1;
-            this.total = a;
-            this.absTotal = Math.abs(a);
+            this.total = 0; //need update later
         }
 
         @Override
