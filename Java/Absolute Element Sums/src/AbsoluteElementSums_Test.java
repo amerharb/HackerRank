@@ -115,8 +115,12 @@ public class AbsoluteElementSums_Test {
         }
 
         Arrays.sort(a);
+        StopWatch ar = new StopWatch();
+        ar.start();
         aValues[] aa = aggregateRepeating(a);
+        System.out.println("aggregate Repeating " + ar.stop());
         a = null; //empty memory
+        System.gc();
 
         StopWatch fsw = new StopWatch();
         fsw.resume();
@@ -132,13 +136,13 @@ public class AbsoluteElementSums_Test {
         }
         System.out.println("find total of a array: " + sw.stopAndStart());
 
-        int NC; //Negative count
+        final int NC; //Negative count
         if (fp > 0) {
             NC = aa[fp - 1].rs;
         } else {
             NC = 0;
         }
-        final int LNC = aa[aa.length - 1].rs - NC;
+        final int PC = aa[aa.length - 1].rs - NC; //positive count
         final long totalPN = totalP + totalN;
         int totalX = 0;
         StringBuilder sb = new StringBuilder(q * 2); //at least 2 char for each line
@@ -170,8 +174,12 @@ public class AbsoluteElementSums_Test {
                 nNC = 0;
             }
 
-            long total = totalPN + ((long) totalX * (long) (LNC - nNC));
+            long total = totalPN + ((long) totalX * (long) (PC - nNC));
             M.pause();
+
+            if (Math.abs(newFP - fp) > 2000) {
+                System.out.println("big loop: " + Math.abs(newFP - fp));
+            }
 
             L1.resume();
             for (int j = newFP; j < fp; j++) {
@@ -181,13 +189,16 @@ public class AbsoluteElementSums_Test {
 //                total -= aa[j].absTotal;
                 //aa[j].total is negative here the other is pos
 //                total += Math.abs(aa[j].total + (totalX * aa[j].r)) - aa[j].absTotal;
-                long tXa = (long)totalX * (long)aa[j].r;
-                if (aa[j].total < tXa) {
-                    total += aa[j].total + tXa - aa[j].absTotal;
-                } else {
-                    total += -aa[j].total - tXa - aa[j].absTotal;
-                }
+//                long tXa = (long) totalX * (long) aa[j].r;
+//                if (aa[j].total < tXa) {
+//                    total += aa[j].total + aa[j].total + tXa;
+//                } else {
+//                    total -= tXa;
+//                }
+                total += aa[j].total + aa[j].total + (long) totalX * (long) aa[j].r;
+
             }
+
             L1.pause();
             L2.resume();
             for (int j = fp; j < newFP; j++) {
@@ -196,12 +207,13 @@ public class AbsoluteElementSums_Test {
 //                total -= totalX;
                 //total -= aa[j].absTotal;
 //                total += Math.abs(aa[j].total + (totalX * aa[j].r)) - aa[j].absTotal;
-                long tXa = (long)totalX * (long)aa[j].r;
-                if (aa[j].total < tXa) {
-                    total += aa[j].total + tXa - aa[j].absTotal;
-                } else {
-                    total += -aa[j].total - tXa - aa[j].absTotal;
-                }
+//                long tXa = (long) totalX * (long) aa[j].r;
+//                if (aa[j].total < tXa) {
+//                    total += tXa;
+//                } else {
+//                    total -= aa[j].total + aa[j].total + tXa;
+//                }
+                total -= aa[j].total + aa[j].total + (long) totalX * (long) aa[j].r;
             }
             L2.pause();
             A.pause();
@@ -301,7 +313,7 @@ public class AbsoluteElementSums_Test {
 
     static aValues[] aggregateRepeating(int[] arr) {
 
-        aValues[] t = new aValues[Math.min(arr.length, 4001)];
+        aValues[] t = new aValues[(arr.length <= 4001) ? arr.length : 4001];
 
         int j = 0;
         t[j] = new aValues(arr[0], 0);
@@ -328,7 +340,7 @@ public class AbsoluteElementSums_Test {
         private int r = 1;
         private int rs;
         private int total;
-        private int absTotal;
+        //private int absTotal;
 
         public void inc() {
             r++;
@@ -351,7 +363,11 @@ public class AbsoluteElementSums_Test {
 
         public void updateTotal() {
             this.total = a * r;
-            this.absTotal = Math.abs(this.total);
+//            if (total < 0) {
+//                absTotal = -total;
+//            } else {
+//                absTotal = total;
+//            }
         }
 
         @Override
