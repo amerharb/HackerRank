@@ -138,11 +138,11 @@ public class AbsoluteElementSums_Test {
 
         final int NC; //Negative count
         if (fp > 0) {
-            NC = aa[fp - 1].rs;
+            NC = aa[fp - 1].rSum;
         } else {
             NC = 0;
         }
-        final int PC = aa[aa.length - 1].rs - NC; //positive count
+        final int PC = aa[aa.length - 1].rSum - NC; //positive count
         final long totalPN = totalP + totalN;
         int totalX = 0;
         StringBuilder sb = new StringBuilder(q * 2); //at least 2 char for each line
@@ -157,19 +157,11 @@ public class AbsoluteElementSums_Test {
             // int newFP = getFirst(a, -totalX);
             int newFP = getFirst(aa, -totalX);
             fsw.pause();
-
-//            total += totalP + (totalX * (aa.length - fp));
-//            total += totalN - (totalX * fp);
-//            total += totalX * (fp - newFP);
-//            total += totalP + ((long) totalX * (aa[aa.length - 1].rs - aa[fp].rs));
-//            total += totalN - ((long) totalX * aa[fp].rs);
-//            total += (long) totalX * (aa[fp].rs - aa[newFP].rs);
-//            total += totalP + totalN + ((long) totalX * (long)(aa.length - fp - newFP));
             A.resume();
             M.resume();
             int nNC;//new Negative count
             if (newFP > 0) {
-                nNC = aa[newFP - 1].rs;
+                nNC = aa[newFP - 1].rSum;
             } else {
                 nNC = 0;
             }
@@ -177,45 +169,26 @@ public class AbsoluteElementSums_Test {
             long total = totalPN + ((long) totalX * (long) (PC - nNC));
             M.pause();
 
-            if (Math.abs(newFP - fp) > 2000) {
-                System.out.println("big loop: " + Math.abs(newFP - fp));
-            }
-
             L1.resume();
-            for (int j = newFP; j < fp; j++) {
-                count_L1++;
-//                total -= Math.abs(aa[j].total);
-//                total += totalX;
-//                total -= aa[j].absTotal;
-                //aa[j].total is negative here the other is pos
-//                total += Math.abs(aa[j].total + (totalX * aa[j].r)) - aa[j].absTotal;
-//                long tXa = (long) totalX * (long) aa[j].r;
-//                if (aa[j].total < tXa) {
-//                    total += aa[j].total + aa[j].total + tXa;
-//                } else {
-//                    total -= tXa;
-//                }
-                total += aa[j].total + aa[j].total + (long) totalX * (long) aa[j].r;
-
+            if (newFP < fp) {
+                total += (aa[fp - 1].totalSum - aa[newFP].prevTotal) * 2 + (long) totalX * (long) (aa[fp - 1].rSum - aa[newFP].prevR);
+//                total += aa[j].total + aa[j].total + (long) totalX * (long) aa[j].r;
+            } else if (newFP > fp) {
+                total -= (aa[newFP - 1].totalSum - aa[fp].prevTotal) * 2 + (long) totalX * (long) (aa[newFP - 1].rSum - aa[fp].prevR);
+//                total -= aa[j].total + aa[j].total + (long) totalX * (long) aa[j].r;
             }
 
+//            for (int j = newFP; j < fp; j++) {
+//                count_L1++;
+//                total += aa[j].total + aa[j].total + (long) totalX * (long) aa[j].r;
+//            }
             L1.pause();
             L2.resume();
-            for (int j = fp; j < newFP; j++) {
-                count_L2++;
-//                total -= Math.abs(aa[j].total);
-//                total -= totalX;
-                //total -= aa[j].absTotal;
-//                total += Math.abs(aa[j].total + (totalX * aa[j].r)) - aa[j].absTotal;
-//                long tXa = (long) totalX * (long) aa[j].r;
-//                if (aa[j].total < tXa) {
-//                    total += tXa;
-//                } else {
-//                    total -= aa[j].total + aa[j].total + tXa;
-//                }
-                total -= aa[j].total + aa[j].total + (long) totalX * (long) aa[j].r;
-            }
-            L2.pause();
+//            for (int j = fp; j < newFP; j++) {
+//                count_L2++;
+//                total -= aa[j].total + aa[j].total + (long) totalX * (long) aa[j].r;
+//            }
+//            L2.pause();
             A.pause();
 
             sb.append(total);
@@ -232,7 +205,6 @@ public class AbsoluteElementSums_Test {
         if (write == 0) {
             System.out.print(sb);
             System.out.println("time to write to console: " + sw.stopAndStart());
-
         } else if (write == 1) {
             File file = new File("my_output.txt");
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
@@ -243,9 +215,9 @@ public class AbsoluteElementSums_Test {
 
             if (check) {
                 if (compareFile(outputFileName, "my_output.txt")) {
-                    System.out.println("result match");
+                    System.out.println("result match OK OK OK OK ");
                 } else {
-                    System.out.println("**** result NOT Match******");
+                    System.out.println("************** result NOT Match *************");
                 }
                 System.out.println("time to compair files: " + sw.stopAndStart());
             }
@@ -256,7 +228,7 @@ public class AbsoluteElementSums_Test {
     }
 
     static int getFirst(aValues[] arr, int v) {
-        int k = Arrays.binarySearch(arr, new aValues(v, 0));
+        int k = Arrays.binarySearch(arr, new aValues(v, 0, 0));
         if (k < 0) {
             return -k - 1;
         } else {
@@ -316,14 +288,12 @@ public class AbsoluteElementSums_Test {
         aValues[] t = new aValues[(arr.length <= 4001) ? arr.length : 4001];
 
         int j = 0;
-        t[j] = new aValues(arr[0], 0);
+        t[j] = new aValues(arr[0], 0, 0);
         for (int i = 1; i < arr.length; i++) {
             if (arr[i] == arr[i - 1]) {
-                //t[j].r++;
-                //t[j].rs++;
                 t[j].inc();
             } else {
-                t[++j] = new aValues(arr[i], t[j - 1].rs);
+                t[++j] = new aValues(arr[i], t[j - 1].getRSum(), t[j - 1].getTotalSum());
             }
         }
         aValues[] r = new aValues[j + 1];
@@ -337,37 +307,39 @@ public class AbsoluteElementSums_Test {
     private static class aValues implements Comparable<aValues> {
 
         private final int a;
-        private int r = 1;
-        private int rs;
+        private int r;
+        final int prevR;
+        int rSum;
         private int total;
-        //private int absTotal;
+        final int prevTotal;
+        int totalSum;
 
         public void inc() {
             r++;
-            rs++;
         }
 
-//        public int total() {
-//            return a * r;
-//        }
-
-        /*
-        public aValues(int a) {
+        public aValues(int a, int prevR, int prevTotal) {
             this.a = a;
-        }
-         */
-        public aValues(int a, int prevRS) {
-            this.a = a;
-            this.rs = prevRS + 1;
+            this.r = 1;
+            this.prevR = prevR;
+            this.prevTotal = prevTotal;
         }
 
         public void updateTotal() {
             this.total = a * r;
-//            if (total < 0) {
-//                absTotal = -total;
-//            } else {
-//                absTotal = total;
-//            }
+            this.rSum = prevR + r;
+            this.totalSum = total + prevTotal;
+        }
+
+        public int getRSum() {
+            this.rSum = prevR + r;
+            return this.rSum;
+        }
+
+        public int getTotalSum() {
+            this.total = a * r;
+            this.totalSum = prevTotal + total;
+            return this.totalSum;
         }
 
         @Override
