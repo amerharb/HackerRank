@@ -38,11 +38,11 @@ public class AbsoluteElementSums {
 
         final int NC; //Negative count
         if (fp > 0) {
-            NC = aa[fp - 1].rs;
+            NC = aa[fp - 1].rSum;
         } else {
             NC = 0;
         }
-        final int PC = aa[aa.length - 1].rs - NC; //positive count
+        final int PC = aa[aa.length - 1].rSum - NC; //positive count
         final long totalPN = totalP + totalN;
         int totalX = 0;
 
@@ -52,18 +52,16 @@ public class AbsoluteElementSums {
 
             int nNC;//new Negative count
             if (newFP > 0) {
-                nNC = aa[newFP - 1].rs;
+                nNC = aa[newFP - 1].rSum;
             } else {
                 nNC = 0;
             }
 
             long total = totalPN + ((long) totalX * (long) (PC - nNC));
-
-            for (int j = newFP; j < fp; j++) {
-                total += aa[j].total + aa[j].total + (long) totalX * (long) aa[j].r;
-            }
-            for (int j = fp; j < newFP; j++) {
-                total -= aa[j].total + aa[j].total + (long) totalX * (long) aa[j].r;
+            if (newFP < fp) {
+                total += (aa[fp - 1].totalSum - aa[newFP].prevTotal) * 2 + (long) totalX * (long) (aa[fp - 1].rSum - aa[newFP].prevR);
+            } else if (newFP > fp) {
+                total -= (aa[newFP - 1].totalSum - aa[fp].prevTotal) * 2 + (long) totalX * (long) (aa[newFP - 1].rSum - aa[fp].prevR);
             }
 
             System.out.println(total);
@@ -71,7 +69,7 @@ public class AbsoluteElementSums {
     }
 
     static int getFirst(aValues[] arr, int v) {
-        int k = Arrays.binarySearch(arr, new aValues(v, 0));
+        int k = Arrays.binarySearch(arr, new aValues(v, 0, 0));
         if (k < 0) {
             return -k - 1;
         } else {
@@ -84,12 +82,12 @@ public class AbsoluteElementSums {
         aValues[] t = new aValues[(arr.length <= 4001) ? arr.length : 4001];
 
         int j = 0;
-        t[j] = new aValues(arr[0], 0);
+        t[j] = new aValues(arr[0], 0, 0);
         for (int i = 1; i < arr.length; i++) {
             if (arr[i] == arr[i - 1]) {
                 t[j].inc();
             } else {
-                t[++j] = new aValues(arr[i], t[j - 1].rs);
+                t[++j] = new aValues(arr[i], t[j - 1].getRSum(), t[j - 1].getTotalSum());
             }
         }
         aValues[] r = new aValues[j + 1];
@@ -103,24 +101,39 @@ public class AbsoluteElementSums {
     private static class aValues implements Comparable<aValues> {
 
         private final int a;
-        private int r = 1;
-        private int rs;
-        int total;
+        private int r;
+        final int prevR;
+        int rSum;
+        private int total;
+        final int prevTotal;
+        int totalSum;
 
         public void inc() {
             r++;
-            rs++;
+        }
+
+        public aValues(int a, int prevR, int prevTotal) {
+            this.a = a;
+            this.r = 1;
+            this.prevR = prevR;
+            this.prevTotal = prevTotal;
         }
 
         public void updateTotal() {
-            total = a * r;
-
+            this.total = a * r;
+            this.rSum = prevR + r;
+            this.totalSum = total + prevTotal;
         }
 
-        public aValues(int a, int prevRS) {
-            this.a = a;
-            this.rs = prevRS + 1;
-            this.total = 0; //need update later
+        public int getRSum() {
+            this.rSum = prevR + r;
+            return this.rSum;
+        }
+
+        public int getTotalSum() {
+            this.total = a * r;
+            this.totalSum = prevTotal + total;
+            return this.totalSum;
         }
 
         @Override
