@@ -24,15 +24,12 @@ public class AbsoluteElementSums
         FixedArray FA = new FixedArray(a);
         a = null; //empty memory
 
-        final int NC = FA.getNegativeCount();
-        final int PC = FA.getPositiveCount();
         final long totalPN = FA.getTotalPositive() - FA.getTotalNegative();
         int totalX = 0;
 
         for (int i = 0; i < q; i++) {
             totalX += x[i];
-            int nNC = FA.getNegativeCount(totalX);//new Negative count
-            long total = totalPN + ((long) totalX * (long) (PC - nNC)) + (FA.getTotalNegative() - FA.getTotalSum(-totalX - 1)) * 2 + (long) totalX * (long) (FA.getNegativeCount() - FA.getNegativeCount(totalX));
+            long total = totalPN + ((long) totalX * (long) (FA.getPositiveCount() - FA.getNegativeCount(totalX))) + (FA.getTotalNegative() - FA.getTotalSum(-totalX - 1)) * 2 + (long) totalX * (long) (FA.getNegativeCount() - FA.getNegativeCount(totalX));
             System.out.println(total);
         }
     }
