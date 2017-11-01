@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 
 public class AbsoluteElementSums {
@@ -41,26 +42,25 @@ public class AbsoluteElementSums {
 
         a = null; //empty memory
 
-        final long totalPN = ts[4000] -2 * ts[1999];
         int totalX = 0;
 
         for (int i = 0; i < q; i++) {
             totalX += x[i];
-            long total = totalPN 
-                        + (long) totalX 
-                            * (long) (rs[4000] - 2 * getNegativeCount(totalX, rs))
-                        + (ts[1999] - getTotalSum(-totalX - 1, ts)) * 2;
+            long total = ts[4000]
+                    + (long) totalX
+                    * (long) (rs[4000] - 2 * getNegativeCount(totalX, rs))
+                    - 2 * getTotalSum(totalX, ts);
             System.out.println(total);
         }
     }
 
     static int getTotalSum(int offSet, int[] ts) {
-        if (offSet < -2000) {
+        if (offSet > 1999) {
             return 0;
-        } else if (offSet > 2000) {
+        } else if (offSet < -2001) {
             return ts[4000];
         } else {
-            return ts[offSet + 2000];
+            return ts[1999 - offSet];
         }
     }
 
