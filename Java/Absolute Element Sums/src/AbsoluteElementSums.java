@@ -46,31 +46,22 @@ public class AbsoluteElementSums {
 
         for (int i = 0; i < q; i++) {
             totalX += x[i];
-            long total = ts[4000]
-                    + (long) totalX
-                    * (long) (rs[4000] - 2 * getNegativeCount(totalX, rs))
-                    - 2 * getTotalSum(totalX, ts);
+
+            int NC, NT; //negative count, negative total
+            if (totalX > 1999) {
+                NC = 0;
+                NT = 0;
+            } else if (totalX < -2001) {
+                NC = rs[4000];
+                NT = ts[4000];
+            } else {
+                NC = rs[1999 - totalX];
+                NT = ts[1999 - totalX];
+            }
+
+            long total = ts[4000] - 2 * NT
+                    + (long) totalX * (long) (rs[4000] - 2 * NC);
             System.out.println(total);
-        }
-    }
-
-    static int getTotalSum(int offSet, int[] ts) {
-        if (offSet > 1999) {
-            return 0;
-        } else if (offSet < -2001) {
-            return ts[4000];
-        } else {
-            return ts[1999 - offSet];
-        }
-    }
-
-    static private int getNegativeCount(int offSet, int[] rs) {
-        if (offSet > 1999) {
-            return 0;
-        } else if (offSet < -2001) {
-            return rs[4000];
-        } else {
-            return rs[1999 - offSet];
         }
     }
 }
