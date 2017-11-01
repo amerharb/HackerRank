@@ -41,16 +41,15 @@ public class AbsoluteElementSums {
 
         a = null; //empty memory
 
-        final long totalPN = ts[4000] - ts[1999] - ts[1999];
+        final long totalPN = ts[4000] -2 * ts[1999];
         int totalX = 0;
 
         for (int i = 0; i < q; i++) {
             totalX += x[i];
-            long total = totalPN + ((long) totalX * (long) (rs[4000] - rs[1999]
-                    - getNegativeCount(totalX, rs)))
-                    + (ts[1999] - getTotalSum(-totalX - 1, ts)) * 2 
-                    + (long) totalX * (long) (rs[1999] 
-                    - getNegativeCount(totalX, rs));
+            long total = totalPN 
+                        + (long) totalX 
+                            * (long) (rs[4000] - 2 * getNegativeCount(totalX, rs))
+                        + (ts[1999] - getTotalSum(-totalX - 1, ts)) * 2;
             System.out.println(total);
         }
     }
