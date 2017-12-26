@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_super_reduced_string" default="compile.module.super_reduced_string">
+  <dirname property="module.super_reduced_string.basedir" file="${ant.file.module_super_reduced_string}"/>
+  
+  <property name="module.jdk.home.super_reduced_string" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.super_reduced_string" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.super_reduced_string" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.super_reduced_string" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="super_reduced_string.output.dir" value="${module.super_reduced_string.basedir}/out/production/Super Reduced String"/>
+  <property name="super_reduced_string.testoutput.dir" value="${module.super_reduced_string.basedir}/out/test/Super Reduced String"/>
+  
+  <path id="super_reduced_string.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="super_reduced_string.module.production.classpath">
+    <path refid="${module.jdk.classpath.super_reduced_string}"/>
+  </path>
+  
+  <path id="super_reduced_string.runtime.production.module.classpath">
+    <pathelement location="${super_reduced_string.output.dir}"/>
+  </path>
+  
+  <path id="super_reduced_string.module.classpath">
+    <path refid="${module.jdk.classpath.super_reduced_string}"/>
+    <pathelement location="${super_reduced_string.output.dir}"/>
+  </path>
+  
+  <path id="super_reduced_string.runtime.module.classpath">
+    <pathelement location="${super_reduced_string.testoutput.dir}"/>
+    <pathelement location="${super_reduced_string.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.super_reduced_string">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.super_reduced_string">
+    <patternset refid="excluded.from.module.super_reduced_string"/>
+  </patternset>
+  
+  <path id="super_reduced_string.module.sourcepath">
+    <dirset dir="${module.super_reduced_string.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.super_reduced_string" depends="compile.module.super_reduced_string.production,compile.module.super_reduced_string.tests" description="Compile module Super Reduced String"/>
+  
+  <target name="compile.module.super_reduced_string.production" depends="register.custom.compilers" description="Compile module Super Reduced String; production classes">
+    <mkdir dir="${super_reduced_string.output.dir}"/>
+    <javac2 destdir="${super_reduced_string.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.super_reduced_string}/javac">
+      <compilerarg line="${compiler.args.super_reduced_string}"/>
+      <bootclasspath refid="super_reduced_string.module.bootclasspath"/>
+      <classpath refid="super_reduced_string.module.production.classpath"/>
+      <src refid="super_reduced_string.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.super_reduced_string"/>
+    </javac2>
+    
+    <copy todir="${super_reduced_string.output.dir}">
+      <fileset dir="${module.super_reduced_string.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.super_reduced_string.tests" depends="register.custom.compilers,compile.module.super_reduced_string.production" description="compile module Super Reduced String; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.super_reduced_string" description="cleanup module">
+    <delete dir="${super_reduced_string.output.dir}"/>
+    <delete dir="${super_reduced_string.testoutput.dir}"/>
+  </target>
+</project>
