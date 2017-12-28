@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_the_coin_change_problem" default="compile.module.the_coin_change_problem">
+  <dirname property="module.the_coin_change_problem.basedir" file="${ant.file.module_the_coin_change_problem}"/>
+  
+  <property name="module.jdk.home.the_coin_change_problem" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.the_coin_change_problem" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.the_coin_change_problem" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.the_coin_change_problem" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="the_coin_change_problem.output.dir" value="${module.the_coin_change_problem.basedir}/out/production/The Coin Change Problem"/>
+  <property name="the_coin_change_problem.testoutput.dir" value="${module.the_coin_change_problem.basedir}/out/test/The Coin Change Problem"/>
+  
+  <path id="the_coin_change_problem.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="the_coin_change_problem.module.production.classpath">
+    <path refid="${module.jdk.classpath.the_coin_change_problem}"/>
+  </path>
+  
+  <path id="the_coin_change_problem.runtime.production.module.classpath">
+    <pathelement location="${the_coin_change_problem.output.dir}"/>
+  </path>
+  
+  <path id="the_coin_change_problem.module.classpath">
+    <path refid="${module.jdk.classpath.the_coin_change_problem}"/>
+    <pathelement location="${the_coin_change_problem.output.dir}"/>
+  </path>
+  
+  <path id="the_coin_change_problem.runtime.module.classpath">
+    <pathelement location="${the_coin_change_problem.testoutput.dir}"/>
+    <pathelement location="${the_coin_change_problem.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.the_coin_change_problem">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.the_coin_change_problem">
+    <patternset refid="excluded.from.module.the_coin_change_problem"/>
+  </patternset>
+  
+  <path id="the_coin_change_problem.module.sourcepath">
+    <dirset dir="${module.the_coin_change_problem.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.the_coin_change_problem" depends="compile.module.the_coin_change_problem.production,compile.module.the_coin_change_problem.tests" description="Compile module The Coin Change Problem"/>
+  
+  <target name="compile.module.the_coin_change_problem.production" depends="register.custom.compilers" description="Compile module The Coin Change Problem; production classes">
+    <mkdir dir="${the_coin_change_problem.output.dir}"/>
+    <javac2 destdir="${the_coin_change_problem.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.the_coin_change_problem}/javac">
+      <compilerarg line="${compiler.args.the_coin_change_problem}"/>
+      <bootclasspath refid="the_coin_change_problem.module.bootclasspath"/>
+      <classpath refid="the_coin_change_problem.module.production.classpath"/>
+      <src refid="the_coin_change_problem.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.the_coin_change_problem"/>
+    </javac2>
+    
+    <copy todir="${the_coin_change_problem.output.dir}">
+      <fileset dir="${module.the_coin_change_problem.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.the_coin_change_problem.tests" depends="register.custom.compilers,compile.module.the_coin_change_problem.production" description="compile module The Coin Change Problem; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.the_coin_change_problem" description="cleanup module">
+    <delete dir="${the_coin_change_problem.output.dir}"/>
+    <delete dir="${the_coin_change_problem.testoutput.dir}"/>
+  </target>
+</project>
