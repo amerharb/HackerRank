@@ -20,9 +20,14 @@ public class Solution {
 			c[c_i] = in.nextLong();
 		}
 		// Print the number of ways of making change for 'n' units using coins having the values given by 'c'
+		long w = System.currentTimeMillis();
 		long ways = getWays(n, c);
 		System.out.println(ways);
+		//TEST:
+		System.out.println("sec: " + ((System.currentTimeMillis() - w) / 1000));
 	}
+
+	static long timeFor1MYays;
 
 	static long getWays(long n, long[] c) {
 		long ways = 0;
@@ -34,9 +39,15 @@ public class Solution {
 		while (curCol < c.length) {
 			long total = getTotal(idx, c);
 			if (total < n) {
-				incIdx(idx, c, idxMax);
+				//incIdx(idx, c, idxMax);
+				incIdx(idx, c, idxMax, (n - total));
 			} else if (total == n) { //found total
 				ways++;
+				//TEST:
+				if (ways % 1000000 == 0) {
+					System.out.println("ways: " + ways+ " mili sec: " + ((System.currentTimeMillis() - timeFor1MYays)));
+					timeFor1MYays = System.currentTimeMillis();
+				}
 				skipFirstCol(idx, c, idxMax);
 
 			} else { // total > n
@@ -90,6 +101,48 @@ public class Solution {
 		return max;
 	}
 
+	private static void incIdx(int[] idx, long[] c, int[] idxMax, long incBy) {
+		//incBy must be > 0
+		if (idx[0] < idxMax[0]) {
+			if (((idxMax[0] - idx[0]) * c[0]) < incBy) {
+				idx[0] = idxMax[0];
+			} else {
+				if ((incBy / c[0]) < 1) {
+					idx[0]++;
+				} else {
+					idx[0] += (incBy / c[0]);
+				}
+			}
+		} else {
+			incIdx(idx, c, idxMax);
+		}
+	}
+
+	private static void incIdxBy(int[] idx, long[] c, int[] idxMax, long incBy) {
+		int col = 0;
+		while (col < c.length && incBy > 0) {
+			if (((idxMax[col] - idx[col]) * c[col]) < incBy) {
+				idx[col] = 0;
+				idx[col + 1]++;
+				incBy -= c[col + 1];
+			} else {
+				idx[col] += (incBy / c[col]) < 1 ? 1 : (incBy / c[0]);
+				break;
+			}
+
+			if (idx[col] < idxMax[col]) {
+				idx[col]++;
+				break;
+			} else {
+				idx[col] = 0;
+				col++;
+			}
+		}
+		if (col > curCol) {
+			curCol = col;
+		}
+	}
+
 	private static void incIdx(int[] idx, long[] c, int[] idxMax) {
 		int col = 0;
 		while (col < c.length) {
@@ -109,23 +162,6 @@ public class Solution {
 	private static void skipFirstCol(int[] idx, long[] c, int[] idxMax) {
 		idx[0] = idxMax[0];
 		incIdx(idx, c, idxMax);
-
-		/*
-		idx[0] = 0;
-		int col = 1;
-		while (col < c.length) {
-			if (idx[col] < idxMax[col]) {
-				idx[col]++;
-				break;
-			} else {
-				idx[col] = 0;
-				col++;
-			}
-		}
-		if (col > curCol) {
-			curCol = col;
-		}
-*/
 	}
 
 	private static long getTotal(int[] idx, long[] c) {
