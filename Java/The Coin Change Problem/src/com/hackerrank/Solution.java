@@ -125,6 +125,7 @@ public class Solution {
 				idx[col] = 0;
 				idx[col + 1]++;
 				incBy -= c[col + 1];
+				incIdxBy(idx, c, idxMax, incBy);
 			} else {
 				idx[col] += (incBy / c[col]) < 1 ? 1 : (incBy / c[0]);
 				break;
