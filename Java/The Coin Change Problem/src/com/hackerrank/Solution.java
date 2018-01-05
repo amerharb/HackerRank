@@ -38,10 +38,13 @@ public class Solution {
         Arrays.sort(c);
         int[] idx = new int[c.length];
         int[] idxMax = getIdxMax(idx, c, n);
+        long[][] idxTotal = getTotaled(c, idxMax);
 
         while (curCol < c.length) {
-            watch.setTask("getingn Total");
-            long total = getTotal(idx, c);
+//            watch.setTask("calc Total");
+            //long total = getTotal(idx, c);
+            //long total = getTotal(idx, c, n);
+            long total = getTotal(idx, idxTotal);
             if (total < n) {
                 watch.setTask("Total < n");
                 //incIdx(idx, c, idxMax);
@@ -51,8 +54,8 @@ public class Solution {
                 watch.setTask("Total == n");
                 ways++;
                 //TEST:
-                if (ways % 1000000 == 0) {
-                    System.out.println("ways: " + ways + " mili sec: " + ((System.currentTimeMillis() - timeFor1MWays)));
+                if (ways % 10_000_000 == 0) {
+                    System.out.println("ways: " + ways/1_000_000 + "M in " + (System.currentTimeMillis() - timeFor1MWays) +  " mili sec:" );
                     timeFor1MWays = System.currentTimeMillis();
                 }
                 skipFirstCol(idx, c, idxMax);
@@ -75,7 +78,6 @@ public class Solution {
                     }
 
                     if (getTotal(tempIdx, c) > n) {
-                        //skipForCol(idx, c, idxMax, i);
                         colToSkip++;
                     } else {
                         break;
@@ -85,6 +87,17 @@ public class Solution {
             }
         }
         return ways;
+    }
+
+    private static long[][] getTotaled(long[] c, int[] idxMax) {
+        long[][] total = new long[c.length][];
+        for (int i = 0; i < c.length; i++) {
+            total[i] = new long[idxMax[i] + 1];
+            for (int j = 0; j < total[i].length; j++) {
+                total[i][j] = c[i] * j;
+            }
+        }
+        return total;
     }
 
     private static void skipForCol(int[] idx, long[] c, int[] idxMax, int col) {
@@ -181,6 +194,25 @@ public class Solution {
         long total = 0;
         for (int i = 0; i < c.length; i++) {
             total += c[i] * idx[i];
+        }
+        return total;
+    }
+
+    private static long getTotal(int[] idx, long[][] idxTotal) {
+        long total = 0;
+        for (int i = idxTotal.length - 1; i >= 0; i--) {
+            total += idxTotal[i][idx[i]];
+        }
+        return total;
+    }
+
+    private static long getTotal(int[] idx, long[] c, long n) {
+        long total = 0;
+
+        for (int i = c.length - 1; i >= 0; i--) {
+            total += c[i] * idx[i];
+            if (total > n)
+                return total;
         }
         return total;
     }
