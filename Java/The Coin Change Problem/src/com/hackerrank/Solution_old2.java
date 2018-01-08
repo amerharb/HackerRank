@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 // https://www.hackerrank.com/challenges/coin-change/problem
 
-public class Solution_old {
+public class Solution_old2 {
 
 	static class CoinUse implements Comparable<CoinUse> {
 		long value;

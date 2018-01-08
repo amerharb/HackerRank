@@ -4,7 +4,7 @@ package com.hackerrank;
 
 import java.util.*;
 
-public class Solution_old_old {
+public class Solution_old1 {
 
 	static long getWays(long n, long[] c) {
 		long ways = 0;

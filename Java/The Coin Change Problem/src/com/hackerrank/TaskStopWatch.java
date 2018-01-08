@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 /**
- *
  * @author amhar11
  */
 public class TaskStopWatch extends StopWatch {
@@ -21,6 +20,10 @@ public class TaskStopWatch extends StopWatch {
             }
             setCurrentTask(taskName);
         }
+    }
+
+    public String getCurrTask() {
+        return currTask;
     }
 
     public void setTaskAndResume(String taskName) {
