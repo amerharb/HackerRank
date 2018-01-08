@@ -2,21 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1a33b312-396d-4300-a733-65ee81a969c9" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/hackerrank/Solution_old3.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/hackerrank/TreeTaskStopWatch.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/out/production/The Coin Change Problem/com/hackerrank/Solution.class" afterPath="$PROJECT_DIR$/out/production/The Coin Change Problem/com/hackerrank/Solution.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/The Coin Change Problem/com/hackerrank/Solution_old$1.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/The Coin Change Problem/com/hackerrank/Solution_old$CoinUse.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/The Coin Change Problem/com/hackerrank/Solution_old$CoinUseList.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/The Coin Change Problem/com/hackerrank/Solution_old.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/The Coin Change Problem/com/hackerrank/Solution_old_old.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/The Coin Change Problem/com/hackerrank/TaskStopWatch$1.class" afterPath="$PROJECT_DIR$/out/production/The Coin Change Problem/com/hackerrank/TaskStopWatch$1.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/The Coin Change Problem/com/hackerrank/TaskStopWatch.class" afterPath="$PROJECT_DIR$/out/production/The Coin Change Problem/com/hackerrank/TaskStopWatch.class" />
       <change beforePath="$PROJECT_DIR$/src/com/hackerrank/Solution.java" afterPath="$PROJECT_DIR$/src/com/hackerrank/Solution.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/hackerrank/Solution_old.java" afterPath="$PROJECT_DIR$/src/com/hackerrank/Solution_old2.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/hackerrank/Solution_old_old.java" afterPath="$PROJECT_DIR$/src/com/hackerrank/Solution_old1.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/hackerrank/TaskStopWatch.java" afterPath="$PROJECT_DIR$/src/com/hackerrank/TaskStopWatch.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/hackerrank/Solution_old1.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/com/hackerrank/Solution_old2.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/com/hackerrank/Solution_old3.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/com/hackerrank/StopWatch.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/com/hackerrank/TaskStopWatch.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/com/hackerrank/TreeTaskStopWatch.java" afterPath="" />
     </list>
     <ignored path="The Coin Change Problem.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -41,56 +35,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="Solution_old3.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/hackerrank/Solution_old3.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="15" column="13" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="229" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Solution.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/hackerrank/Solution.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-167">
-              <caret line="34" column="26" lean-forward="false" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
+            <state relative-caret-position="308">
+              <caret line="21" column="9" lean-forward="true" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#186#187#0" expanded="true" />
                 <element signature="e#216#217#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Solution_old2.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/hackerrank/Solution_old2.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-75">
-              <caret line="12" column="5" lean-forward="false" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
-              <folding>
-                <element signature="class#CoinUse#0;class#Solution_old2#0" expanded="false" />
-                <element signature="class#CoinUseList#0;class#Solution_old2#0" expanded="false" />
-                <element signature="method#getWays#0;class#Solution_old2#0" expanded="false" />
-                <element signature="e#2713#2796#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TaskStopWatch.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/hackerrank/TaskStopWatch.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="358">
-              <caret line="24" column="24" lean-forward="false" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#593#594#0" expanded="true" />
-                <element signature="e#624#625#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -500,9 +453,9 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3994638" sideWeight="0.5125" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3291714" sideWeight="0.419375" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291714" sideWeight="0.419375" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291714" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291714" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3291714" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.216971" sideWeight="0.49407783" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24973147" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -590,118 +543,20 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/hackerrank/Solution_old1.java</url>
-          <line>199</line>
-          <properties />
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/hackerrank/Solution_old1.java</url>
-          <line>218</line>
-          <properties />
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/hackerrank/Solution_old2.java</url>
-          <line>72</line>
-          <properties />
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/hackerrank/Solution_old2.java</url>
-          <line>182</line>
-          <properties />
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/hackerrank/Solution_old2.java</url>
-          <line>176</line>
-          <properties />
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/hackerrank/Solution_old3.java</url>
-          <line>37</line>
-          <properties />
-          <option name="timeStamp" value="26" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/hackerrank/Solution_old3.java</url>
-          <line>65</line>
-          <properties />
-          <option name="timeStamp" value="32" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/hackerrank/Solution_old3.java</url>
-          <line>49</line>
-          <properties />
-          <option name="timeStamp" value="36" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/hackerrank/Solution_old3.java</url>
-          <line>133</line>
-          <properties />
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/hackerrank/Solution_old3.java</url>
-          <line>163</line>
-          <properties />
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/hackerrank/Solution_old3.java</url>
-          <line>51</line>
-          <properties />
-          <option name="timeStamp" value="41" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/hackerrank/Solution_old3.java</url>
-          <line>168</line>
-          <properties />
-          <option name="timeStamp" value="42" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <condition expression="ways == 1000" language="JAVA" />
-          <url>file://$PROJECT_DIR$/src/com/hackerrank/Solution_old3.java</url>
-          <line>54</line>
-          <properties />
-          <option name="timeStamp" value="45" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/hackerrank/Solution_old3.java</url>
-          <line>85</line>
-          <properties />
-          <option name="timeStamp" value="46" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/hackerrank/Solution_old3.java</url>
-          <line>79</line>
-          <properties />
-          <option name="timeStamp" value="47" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <condition expression="idx[i] == 240" language="JAVA" />
-          <url>file://$PROJECT_DIR$/src/com/hackerrank/Solution_old3.java</url>
-          <line>203</line>
-          <properties />
-          <option name="timeStamp" value="48" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/hackerrank/Solution.java</url>
-          <line>39</line>
+          <line>37</line>
           <properties />
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/hackerrank/Solution.java</url>
-          <line>43</line>
+          <line>41</line>
           <properties />
           <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/hackerrank/Solution.java</url>
-          <line>52</line>
+          <line>50</line>
           <properties />
           <option name="timeStamp" value="53" />
         </line-breakpoint>
@@ -741,6 +596,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="12" column="41" lean-forward="false" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -748,11 +604,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="525">
           <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#593#594#0" expanded="true" />
-            <element signature="e#624#625#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -760,13 +612,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3875">
           <caret line="171" column="17" lean-forward="false" selection-start-line="171" selection-start-column="17" selection-end-line="171" selection-end-column="17" />
-          <folding>
-            <element signature="method#getCombination#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getLimitedFactorial#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayCopy#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayElimantsSum#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayElimantsSumInt#0;class#Solution_old1#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -774,9 +620,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -784,13 +628,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="method#getCombination#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getLimitedFactorial#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayCopy#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayElimantsSum#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayElimantsSumInt#0;class#Solution_old1#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -798,13 +636,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="method#getCombination#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getLimitedFactorial#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayCopy#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayElimantsSum#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayElimantsSumInt#0;class#Solution_old1#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -825,12 +657,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="155">
           <caret line="184" column="0" lean-forward="false" selection-start-line="184" selection-start-column="0" selection-end-line="184" selection-end-column="0" />
-          <folding>
-            <element signature="class#CoinUse#0;class#Solution_old2#0" expanded="false" />
-            <element signature="class#CoinUseList#0;class#Solution_old2#0" expanded="false" />
-            <element signature="method#getWays#0;class#Solution_old2#0" expanded="false" />
-            <element signature="e#2713#2796#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -839,11 +666,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="525">
           <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#593#594#0" expanded="true" />
-            <element signature="e#624#625#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -851,13 +674,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3875">
           <caret line="171" column="17" lean-forward="false" selection-start-line="171" selection-start-column="17" selection-end-line="171" selection-end-column="17" />
-          <folding>
-            <element signature="method#getCombination#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getLimitedFactorial#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayCopy#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayElimantsSum#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayElimantsSumInt#0;class#Solution_old1#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -865,6 +682,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="12" column="41" lean-forward="false" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -872,9 +690,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="575">
           <caret line="69" column="28" lean-forward="true" selection-start-line="69" selection-start-column="28" selection-end-line="69" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -882,13 +698,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="method#getCombination#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getLimitedFactorial#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayCopy#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayElimantsSum#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayElimantsSumInt#0;class#Solution_old1#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -896,13 +706,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="method#getCombination#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getLimitedFactorial#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayCopy#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayElimantsSum#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayElimantsSumInt#0;class#Solution_old1#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -923,12 +727,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="155">
           <caret line="184" column="0" lean-forward="false" selection-start-line="184" selection-start-column="0" selection-end-line="184" selection-end-column="0" />
-          <folding>
-            <element signature="class#CoinUse#0;class#Solution_old2#0" expanded="false" />
-            <element signature="class#CoinUseList#0;class#Solution_old2#0" expanded="false" />
-            <element signature="method#getWays#0;class#Solution_old2#0" expanded="false" />
-            <element signature="e#2713#2796#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -936,13 +735,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="6" column="29" lean-forward="false" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
-          <folding>
-            <element signature="method#getCombination#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getLimitedFactorial#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayCopy#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayElimantsSum#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayElimantsSumInt#0;class#Solution_old1#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -950,9 +743,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="127" column="28" lean-forward="false" selection-start-line="127" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -960,9 +751,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -970,6 +759,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="12" column="41" lean-forward="false" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -977,11 +767,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="525">
           <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#593#594#0" expanded="true" />
-            <element signature="e#624#625#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -989,13 +775,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3875">
           <caret line="171" column="17" lean-forward="false" selection-start-line="171" selection-start-column="17" selection-end-line="171" selection-end-column="17" />
-          <folding>
-            <element signature="method#getCombination#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getLimitedFactorial#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayCopy#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayElimantsSum#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayElimantsSumInt#0;class#Solution_old1#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1003,9 +783,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1013,13 +791,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="method#getCombination#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getLimitedFactorial#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayCopy#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayElimantsSum#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayElimantsSumInt#0;class#Solution_old1#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1027,13 +799,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="method#getCombination#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getLimitedFactorial#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayCopy#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayElimantsSum#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayElimantsSumInt#0;class#Solution_old1#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1055,6 +821,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="12" column="41" lean-forward="false" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1062,13 +829,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="6" column="7" lean-forward="false" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
-          <folding>
-            <element signature="method#getCombination#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getLimitedFactorial#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayCopy#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayElimantsSum#0;class#Solution_old1#0" expanded="false" />
-            <element signature="method#getArrayElimantsSumInt#0;class#Solution_old1#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1076,9 +837,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="15" column="13" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="229" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1086,11 +845,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="358">
           <caret line="24" column="24" lean-forward="false" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#593#594#0" expanded="true" />
-            <element signature="e#624#625#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1098,10 +853,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#398#399#0" expanded="true" />
-            <element signature="e#437#438#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1117,19 +869,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-75">
           <caret line="12" column="5" lean-forward="false" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
-          <folding>
-            <element signature="class#CoinUse#0;class#Solution_old2#0" expanded="false" />
-            <element signature="class#CoinUseList#0;class#Solution_old2#0" expanded="false" />
-            <element signature="method#getWays#0;class#Solution_old2#0" expanded="false" />
-            <element signature="e#2713#2796#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/hackerrank/Solution.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-167">
-          <caret line="34" column="26" lean-forward="false" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
+        <state relative-caret-position="308">
+          <caret line="21" column="9" lean-forward="true" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#186#187#0" expanded="true" />
