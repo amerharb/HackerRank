@@ -45,6 +45,10 @@ public class Solution {
             }
             if (sum == 0) {
                 ways++;
+                if (c[1] % c[0] == 0){
+                    ways += arr[1];
+                    arr[1] = 0;
+                }
             }
 
             i = 0;
