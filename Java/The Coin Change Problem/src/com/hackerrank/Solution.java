@@ -34,6 +34,7 @@ public class Solution {
 
         long ways = 0;
 
+
         while (i != 0) {
             long sum = n;
             for (int j = a.length - 1; j > i - 1; j--) {
@@ -55,7 +56,10 @@ public class Solution {
                     ways++;
                 }
             } else {
-                if (c[1] % c[0] == 0) {
+                if (c[2] % c[1] == 0 && c[1] % c[0] == 0) {
+                    a[2] = 0;
+                    a[1] = 0;
+                } else if (c[1] % c[0] == 0) {
                     a[1] = 0;
                 }
             }
