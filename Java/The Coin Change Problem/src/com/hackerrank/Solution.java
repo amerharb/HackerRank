@@ -22,44 +22,67 @@ public class Solution {
         }
         // Print the number of ways of making change for 'n' units using coins having the values given by 'c'
 
+        long w = System.currentTimeMillis();
         long ways = getWays(n, c); //give the index of last elemint+1
         System.out.println(ways);
+        System.out.println((System.currentTimeMillis() - w) / 1000 + " sec");
     }
 
     private long getWays(long n, long[] c) {
 
         Arrays.sort(c);
-        long[] arr = new long[c.length];
-        int i = arr.length;
+        long[] a = new long[c.length];
+        int i = a.length;
 
         long ways = 0;
 
         while (i != 0) {
             long sum = n;
-            for (int j = arr.length - 1; j > i - 1; j--) {
-                sum -= arr[j] * c[j];
+            for (int j = a.length - 1; j > i - 1; j--) {
+                sum -= a[j] * c[j];
             }
             for (int j = i - 1; j >= 0; j--) {
-                arr[j] = sum / c[j];
-                sum -= arr[j] * c[j];
+                a[j] = sum / c[j];
+                sum -= a[j] * c[j];
             }
             if (sum == 0) {
-                ways++;
-                if (c[1] % c[0] == 0){
-                    ways += arr[1];
-                    arr[1] = 0;
+//                System.out.print("good: ");
+//                System.out.println(Arrays.toString(a));
+                if (c[2] % c[1] == 0 && c[1] % c[0] == 0) {
+                    ways += ((a[1] + 1) * (a[2] + 1)) + (getSerSum(a[2]) * c[1]);
+                    a[2] = 0;
+                    a[1] = 0;
+                } else if (c[1] % c[0] == 0) {
+                    ways += a[1] + 1;
+                    a[1] = 0;
+                }else{
+                    ways++;
+                }
+            } else {
+//                System.out.print("bad: ");
+//                System.out.println(Arrays.toString(a));
+                if (c[1] % c[0] == 0) {
+                    a[1] = 0;
                 }
             }
 
             i = 0;
-            for (int j = 1; j < arr.length; j++) {
-                if (arr[j] > 0) {
-                    arr[j]--;
+            for (int j = 1; j < a.length; j++) {
+                if (a[j] > 0) {
+                    a[j]--;
                     i = j;
                     break;
                 }
             }
         }
         return ways;
+    }
+
+    private long getSerSum(long x) {
+        long t = 0;
+        for (long l = x; l > 0; l--) {
+            t += l;
+        }
+        return t;
     }
 }
