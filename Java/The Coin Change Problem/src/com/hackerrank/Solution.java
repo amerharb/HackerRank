@@ -22,10 +22,8 @@ public class Solution {
         }
         // Print the number of ways of making change for 'n' units using coins having the values given by 'c'
 
-        long w = System.currentTimeMillis();
         long ways = getWays(n, c); //give the index of last elemint+1
         System.out.println(ways);
-        System.out.println((System.currentTimeMillis() - w) + " mili sec");
     }
 
     private long getWays(int n, int[] c) {
