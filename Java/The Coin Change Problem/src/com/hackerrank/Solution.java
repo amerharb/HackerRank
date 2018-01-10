@@ -22,10 +22,8 @@ public class Solution {
         }
         // Print the number of ways of making change for 'n' units using coins having the values given by 'c'
 
-        long w = System.currentTimeMillis();
         long ways = getWays(n, c); //give the index of last elemint+1
         System.out.println(ways);
-        System.out.println((System.currentTimeMillis() - w) / 1000 + " sec");
     }
 
     private long getWays(long n, long[] c) {
@@ -46,8 +44,6 @@ public class Solution {
                 sum -= a[j] * c[j];
             }
             if (sum == 0) {
-//                System.out.print("good: ");
-//                System.out.println(Arrays.toString(a));
                 if (c[2] % c[1] == 0 && c[1] % c[0] == 0) {
                     ways += ((a[1] + 1) * (a[2] + 1)) + (getSerSum(a[2]) * c[1]);
                     a[2] = 0;
@@ -59,8 +55,6 @@ public class Solution {
                     ways++;
                 }
             } else {
-//                System.out.print("bad: ");
-//                System.out.println(Arrays.toString(a));
                 if (c[1] % c[0] == 0) {
                     a[1] = 0;
                 }
