@@ -45,8 +45,7 @@ public class Main {
 
         Arrays.sort(list);
         n = headB;
-        for (int i = 0; n != null; i++) {
-            n = headB;
+        while(n != null) {
             if (Arrays.binarySearch(list, n.hashCode()) > 0) {
                 return n.data;
             }
