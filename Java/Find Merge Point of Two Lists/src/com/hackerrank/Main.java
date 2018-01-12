@@ -37,7 +37,6 @@ public class Main {
 
         int[] list = new int[100]; //save list A here
         Node n = headA;
-
         for (int i = 0; n != null; i++) {
             list[i] = n.hashCode();
             n = n.next;
