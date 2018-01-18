@@ -6,22 +6,72 @@ public class Solution {
 
     static int roadsAndLibraries(int nCities, int nLib, int nRoad, int[][] cities) {
 
-        int[][] islands = getIslands(nCities, cities);
-        for (int i = 0; i < islands.length; i++) {
-            System.out.print("island " + i + " : ");
-            for (int j = 0; j < islands[i].length; j++) {
-                System.out.print(islands[i][j] + ", ");
+        if (nRoad >= nLib) {
+            return nCities * nLib;
+        } else {
+            List<List<Integer>> islands = getConnectedGraphs(nCities, cities);
+            int ic = islands.size();
+            int ec = 0;
+            for (int i = 0; i < islands.size(); i++) {
+                ec += islands.get(i).size() - 1;
             }
-            System.out.println();
+            return (ic * nLib) + (ec * nRoad);
         }
-        return 0;
 
-        //        if (nRoad >= nLib) {
-//            return n * nLib;
+//        if (nRoad >= nLib) {
+//            return nCities * nLib;
 //        } else {
-//            int islands = getIslands(n, cities);
-//            return islands;
+//            int[][] islands = getIslands(nCities, cities);
+//            int ic = islands.length;
+//            int ec = 0;
+//            for (int i = 0; i < islands.length; i++) {
+//                ec += islands[i].length - 1;
+//            }
+//            return (ic * nLib) + (ec * nRoad);
 //        }
+    }
+
+    private static List<List<Integer>> getConnectedGraphs(int nCities, int[][] Roads) {
+        //convert array to Lists
+        List<List<Integer>> list = new ArrayList<>();
+        for (int[] road : Roads) {
+            List<Integer> twoCities = new ArrayList<>();
+            twoCities.add(road[0]);
+            twoCities.add(road[1]);
+            list.add(twoCities);
+        }
+
+        for (int i = 0; i < list.size(); i++) {
+            List<List> removeList = new ArrayList<>();
+            for (int j = i + 1; j < list.size(); j++) {
+                if (whenFoundMerge(list.get(i), list.get(j))) {
+                    removeList.add(list.get(j));
+                }
+            }
+            list.removeAll(removeList);
+        }
+
+        //remove empty list from main list
+        List<List> removeList = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).isEmpty()) {
+                removeList.add(list.get(i));
+            }
+        }
+        list.removeAll(removeList);
+        return list;
+    }
+
+    private static boolean whenFoundMerge(List<Integer> l1, List<Integer> l2) {
+        for (Integer e : l2) {
+            if (l1.contains(e)){
+                l2.removeAll(l1); //remove duplicated
+                l1.addAll(l2);
+                l2.clear();
+                return true;
+            }
+        }
+        return false;
     }
 
     private static int[][] getIslands(int n, int[][] cities) {
