@@ -6,7 +6,18 @@ public class Main {
         new Main();
     }
 
-    public Main(){
+    public Main() {
+        //2 5 4
+        Node n = null;
+        int[] arr = {2,5,4};
+        for (int i = 0; i < arr.length; i++) {
+            n = SortedInsert(n, arr[i]);
+        }
+
+        while(n != null){
+            System.out.print(n.data + ", ");
+            n = n.next;
+        }
 
     }
 
@@ -17,6 +28,32 @@ public class Main {
     }
 
     Node SortedInsert(Node head, int data) {
-        return null;
+
+        Node n = new Node();
+        n.data = data;
+        if (head == null) {
+            return n;
+        } else if (n.data <= head.data) {
+            n.next = head;
+            head.prev = n;
+            return n;
+        } else {
+            Node cN = head;
+            Node lastN = cN;
+            while (cN != null && n.data > cN.data) {
+                lastN = cN;
+                cN = cN.next;
+            }
+            if (cN == null) {
+                n.prev = lastN;
+                lastN.next = n;
+            } else {
+                cN.prev.next = n;
+                n.next = cN;
+                n.prev = cN.prev;
+                cN.prev = n;
+            }
+            return head;
+        }
     }
 }

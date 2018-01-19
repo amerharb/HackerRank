@@ -21,35 +21,32 @@ public class Solution {
         if (nRoad >= nLib) {
             return nCities * nLib;
         } else {
-            int[] islands = getIslandsStatistic(nCities, cities);
+            Map<Integer, Vertex> vertices = getVertices(nCities, cities);
+
+            int[] islands = getGraphIslands(vertices);
+            //int[] islands = getIslandsStatistic(nCities, cities);
             int ic = islands.length;
             int ec = 0;
             for (int i = 0; i < islands.length; i++) {
-                ec += islands[i]- 1;
+                ec += islands[i] - 1;
             }
             return (ic * nLib) + (ec * nRoad);
         }
     }
-    private static int[] getIslandsStatistic(int n, int[][] cities) {
-        int[] visitedCity = new int[n];
+
+    private static int[] getGraphIslands(Map<Integer, Vertex> vertexMap) {
         int tourCount = 0;
         List<Integer> islands = new ArrayList<>();
 
-        for (int i = 0; i < n; i++) {
-            if (visitedCity[i] == 0) { //city never visited
+        for (Vertex v : vertexMap.values()) {
+            if (v.TourNo == 0) {
                 tourCount++;
-                visitedCity[i] = tourCount;
-                AtomicInteger visitCount = new AtomicInteger(1);
-                //try to visit all related
-                for (int j = 0; j < cities.length; j++) {
-                    if (i == cities[j][0] - 1) {
-                        travelTo(cities, visitedCity, cities[j][1] - 1, tourCount, visitCount);
-                    }
-                    if (i == cities[j][1] - 1) {
-                        travelTo(cities, visitedCity, cities[j][0] - 1, tourCount, visitCount);
-                    }
+                v.TourNo = tourCount;
+                AtomicInteger cityCounter = new AtomicInteger(1); //start with value one becouse this is here the first city visited
+                for (Vertex adj : v.adjacencies) {
+                    travelTo(adj, tourCount, cityCounter);
                 }
-                islands.add(visitCount.get());
+                islands.add(cityCounter.get());
             }
         }
 
@@ -60,26 +57,80 @@ public class Solution {
         return islandArr;
     }
 
-    private static void travelTo(int[][] cities, int[] visitedCity, int c, int tourCount, AtomicInteger visitCount) {
-        try {
-            if (visitedCity[c] == 0) {
-                visitedCity[c] = tourCount;
-                visitCount.incrementAndGet();
-                //try to visit all related
-                for (int j = 0; j < cities.length; j++) {
-                    if (c == cities[j][0] - 1) {
-                        travelTo(cities, visitedCity, cities[j][1] - 1, tourCount, visitCount);
-                    }
-                    if (c == cities[j][1] - 1) {
-                        travelTo(cities, visitedCity, cities[j][0] - 1, tourCount, visitCount);
-                    }
-                }
+    private static void travelTo(Vertex v, int tourCount, AtomicInteger cityCounter) {
+        if (v.TourNo == 0) {
+            v.TourNo = tourCount;
+            cityCounter.incrementAndGet();
+            for (Vertex adj : v.adjacencies) {
+                travelTo(adj, tourCount, cityCounter);
             }
-        }catch(Exception ex){
-            System.out.println(ex);
         }
     }
 
+    private static Map<Integer, Vertex> getVertices(int nCities, int[][] cities) {
+
+        Map<Integer, Vertex> map = new HashMap<>();
+        for (int i = 1; i <= nCities; i++) {
+            map.put(i, new Vertex(i));
+        }
+
+        for (int[] city : cities) {
+            map.get(city[0]).adjacencies.add(map.get(city[1]));
+            map.get(city[1]).adjacencies.add(map.get(city[0]));
+        }
+        return map;
+    }
+
+//    private static int[] getIslandsStatistic(int n, int[][] cities) {
+//        int[] visitedCity = new int[n];
+//        int tourCount = 0;
+//        List<Integer> islands = new ArrayList<>();
+//
+//        for (int i = 0; i < n; i++) {
+//            if (visitedCity[i] == 0) { //city never visited
+//                tourCount++;
+//                visitedCity[i] = tourCount;
+//                AtomicInteger cityCounter = new AtomicInteger(1); //start with value one becouse this is here the first city visited
+//                //try to visit all related
+//                for (int j = 0; j < cities.length; j++) {
+//                    if (i == cities[j][0] - 1) {
+//                        travelTo(cities, visitedCity, cities[j][1] - 1, tourCount, cityCounter);
+//                    }
+//                    if (i == cities[j][1] - 1) {
+//                        travelTo(cities, visitedCity, cities[j][0] - 1, tourCount, cityCounter);
+//                    }
+//                }
+//                islands.add(cityCounter.get());
+//            }
+//        }
+//
+//        int[] islandArr = new int[islands.size()];
+//        for (int i = 0; i < islands.size(); i++) {
+//            islandArr[i] = islands.get(i).intValue();
+//        }
+//        return islandArr;
+//    }
+//
+//    private static void travelTo(int[][] cities, int[] visitedCity, int c, int tourCount, AtomicInteger cityCounter) {
+//        try {
+//            if (visitedCity[c] == 0) {
+//                visitedCity[c] = tourCount;
+//                cityCounter.incrementAndGet();
+//                //try to visit all related
+//                for (int j = 0; j < cities.length; j++) {
+//                    if (c == cities[j][0] - 1) {
+//                        travelTo(cities, visitedCity, cities[j][1] - 1, tourCount, cityCounter);
+//                    }
+//                    if (c == cities[j][1] - 1) {
+//                        travelTo(cities, visitedCity, cities[j][0] - 1, tourCount, cityCounter);
+//                    }
+//                }
+//            }
+//        } catch (Exception ex) {
+//            System.out.println(ex);
+//        }
+//    }
+//
 
     //
 //    private static List<List<Integer>> getConnectedGraphs(int nCities, int[][] Roads) {
@@ -201,5 +252,15 @@ public class Solution {
             System.out.println(result);
         }
         in.close();
+    }
+}
+
+class Vertex {
+    int ID;
+    Set<Vertex> adjacencies = new HashSet<>();
+    public int TourNo = 0;
+
+    Vertex(int ID) {
+        this.ID = ID;
     }
 }
