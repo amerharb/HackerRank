@@ -5,11 +5,22 @@ import java.util.*;
 public class Solution {
     static int evenTree(int n, int m, int[][] tree) {
         Map<Integer, Vertex> vs = getVertices(n, tree);
+        return countMore(vs.get(1), null);
+    }
+
+    private static int countMore(Vertex root, Vertex origin) {
         int count = 0;
-        for (Vertex v : vs.values()) {
-            if (v.adjacencies.size() % 2 == 0) {
-                //find at least another vertex with eve
-                count++;
+        for (Vertex v : root.adjacencies.values()) {
+            if (v != origin) {
+                if (v.childCount % 2 != 0) {
+                    if (v.childCount == 1) {
+                        count++;
+                    } else {
+                        count += 1 + countMore(v, root);
+                    }
+                } else {
+                    count += countMore(v, root);
+                }
             }
         }
         return count;
@@ -22,9 +33,12 @@ public class Solution {
         }
 
         for (int[] edge : edges) {
-            map.get(edge[0]).adjacencies.add(map.get(edge[1]));
-            map.get(edge[1]).adjacencies.add(map.get(edge[0]));
+            map.get(edge[0]).adjacencies.putIfAbsent(edge[1], map.get(edge[1]));
+            map.get(edge[1]).adjacencies.putIfAbsent(edge[0], map.get(edge[0]));
         }
+
+        //fill child Count
+        map.get(1).countVertexFrom(null); //count for root then it will fill all
         return map;
     }
 
@@ -46,19 +60,21 @@ public class Solution {
 
 class Vertex {
     int ID;
-    Set<Vertex> adjacencies = new HashSet<>();
+    Map<Integer, Vertex> adjacencies = new HashMap<>();
+    int childCount;
 
     Vertex(int ID) {
         this.ID = ID;
     }
 
-    int countVertexFrom(Vertex from) {
+    int countVertexFrom(Vertex from) { //WARNING: it only work in tree structures infinite loop can be happened if there is circular relation
         int count = 0;
-        for (Vertex adj : adjacencies) {
-            if (from != adj) {
+        for (Vertex adj : adjacencies.values()) {
+            if (adj != from) {
                 count += 1 + adj.countVertexFrom(this);
             }
         }
+        childCount = count;
         return count;
     }
 }
